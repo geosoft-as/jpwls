@@ -3,4 +3,4 @@ Source = \
 
 Main = ExcelReader
 
-include $(DEV_HOME)/pwls/Makefile
+include $(DEV_HOME)/jpwls/Makefile

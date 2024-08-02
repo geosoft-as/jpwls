@@ -1,4 +1,4 @@
-package no.geosoft.pwls;
+package no.geosoft.jpwls;
 
 import java.util.Collections;
 import java.util.HashMap;

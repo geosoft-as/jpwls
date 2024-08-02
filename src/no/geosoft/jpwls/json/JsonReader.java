@@ -1,4 +1,4 @@
-package no.geosoft.pwls.json;
+package no.geosoft.jpwls.json;
 
 import java.io.File;
 import java.io.FileInputStream;
@@ -15,19 +15,19 @@ import javax.json.Json;
 import javax.json.JsonArray;
 import javax.json.JsonObject;
 
-import no.geosoft.pwls.Companies;
-import no.geosoft.pwls.Company;
-import no.geosoft.pwls.Curve;
-import no.geosoft.pwls.Curves;
-import no.geosoft.pwls.ISO8601DateParser;
-import no.geosoft.pwls.LoggingMethod;
-import no.geosoft.pwls.LoggingMethods;
-import no.geosoft.pwls.Properties;
-import no.geosoft.pwls.Property;
-import no.geosoft.pwls.Tool;
-import no.geosoft.pwls.ToolClass;
-import no.geosoft.pwls.ToolClasses;
-import no.geosoft.pwls.Tools;
+import no.geosoft.jpwls.Companies;
+import no.geosoft.jpwls.Company;
+import no.geosoft.jpwls.Curve;
+import no.geosoft.jpwls.Curves;
+import no.geosoft.jpwls.ISO8601DateParser;
+import no.geosoft.jpwls.LoggingMethod;
+import no.geosoft.jpwls.LoggingMethods;
+import no.geosoft.jpwls.Properties;
+import no.geosoft.jpwls.Property;
+import no.geosoft.jpwls.Tool;
+import no.geosoft.jpwls.ToolClass;
+import no.geosoft.jpwls.ToolClasses;
+import no.geosoft.jpwls.Tools;
 
 public final class JsonReader
 {
@@ -397,7 +397,7 @@ public final class JsonReader
   public static void main(String[] arguments)
   {
     try {
-      String BASE_URL = "https://raw.githubusercontent.com/rabbagast/pwls/main";
+      String BASE_URL = "https://raw.githubusercontent.com/geosoft-as/pwls/main";
 
       File logsFile = new File("C:/Users/jacob/dev/Petroware/PWLS/PWLS v3.0 Logs.xlsx");
       File propertiesFile = new File("C:/Users/jacob/dev/Petroware/PWLS/PWLS v3.0 Properties.xlsx");

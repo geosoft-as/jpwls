@@ -1,9 +1,9 @@
-ProjectDisplayName = PWLS
+ProjectDisplayName = jpwls
 
 JavaPackages = \
-        no/geosoft/pwls \
-        no/geosoft/pwls/excel \
-        no/geosoft/pwls/json \
+        no/geosoft/jpwls \
+        no/geosoft/jpwls/excel \
+        no/geosoft/jpwls/json \
 
 JavadocPackages = -subpackages no
 
@@ -16,7 +16,7 @@ JavaLibraries = \
 	javax.json-api-1.1.3.jar \
 	justify-0.15.0.jar \
 
-JavaMainClass = no.geosoft.pwls.PwlsWebService
+JavaMainClass = no.geosoft.jpwls.PwlsWebService
 
 include $(DEV_HOME)/tools/Make/Makefile
 

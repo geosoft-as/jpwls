@@ -1,4 +1,4 @@
-package no.geosoft.pwls.excel;
+package no.geosoft.jpwls.excel;
 
 import java.util.Date;
 import java.util.Iterator;
@@ -20,19 +20,18 @@ import org.apache.poi.xssf.usermodel.XSSFRow;
 import org.apache.poi.xssf.usermodel.XSSFSheet;
 import org.apache.poi.openxml4j.exceptions.InvalidFormatException;
 
-import no.geosoft.pwls.Companies;
-import no.geosoft.pwls.Company;
-import no.geosoft.pwls.Curve;
-import no.geosoft.pwls.Curves;
-import no.geosoft.pwls.LoggingMethod;
-import no.geosoft.pwls.LoggingMethods;
-import no.geosoft.pwls.MetaData;
-import no.geosoft.pwls.Properties;
-import no.geosoft.pwls.Property;
-import no.geosoft.pwls.Tool;
-import no.geosoft.pwls.ToolClass;
-import no.geosoft.pwls.ToolClasses;
-import no.geosoft.pwls.Tools;
+import no.geosoft.jpwls.Companies;
+import no.geosoft.jpwls.Company;
+import no.geosoft.jpwls.Curve;
+import no.geosoft.jpwls.Curves;
+import no.geosoft.jpwls.LoggingMethod;
+import no.geosoft.jpwls.LoggingMethods;
+import no.geosoft.jpwls.Properties;
+import no.geosoft.jpwls.Property;
+import no.geosoft.jpwls.Tool;
+import no.geosoft.jpwls.ToolClass;
+import no.geosoft.jpwls.ToolClasses;
+import no.geosoft.jpwls.Tools;
 
 /**
  * Reader for PWLS Excel definition.
@@ -724,10 +723,10 @@ public final class ExcelReader
    */
   public static void main(String[] arguments)
   {
-    String BASE_URL = "https://raw.githubusercontent.com/rabbagast/pwls/main";
+    String BASE_URL = "https://raw.githubusercontent.com/geosoft-as/pwls/main";
 
-    String pwlsUrl = BASE_URL + "/standard/PWLS_v3.0_Logs.xlsx";
-    String propertiesUrl = BASE_URL + "/standard/PWLS_v3.0_Properties.xlsx";
+    String pwlsUrl = BASE_URL + "/excel/PWLS_v3.0_Logs.xlsx";
+    String propertiesUrl = BASE_URL + "/excel/PWLS_v3.0_Properties.xlsx";
 
     java.io.InputStream stream;
 
@@ -735,32 +734,32 @@ public final class ExcelReader
       System.out.println("===TOOL CLASSES========");
       stream = new java.net.URL(pwlsUrl).openStream();
       ToolClasses toolClasses = ExcelReader.readToolClasses(stream);
-      System.out.println(no.geosoft.pwls.json.JsonWriter.toString(no.geosoft.pwls.json.JsonWriter.getToolClasses(toolClasses.getAll()).build()));
+      System.out.println(no.geosoft.jpwls.json.JsonWriter.toString(no.geosoft.jpwls.json.JsonWriter.getToolClasses(toolClasses.getAll()).build()));
       stream.close();
 
       /*
       System.out.println("===COMPANIES===========");
       stream = new java.net.URL(pwlsUrl).openStream();
       Companies companies = ExcelReader.readCompanies(stream);
-      System.out.println(no.geosoft.pwls.json.JsonWriter.toString(no.geosoft.pwls.json.JsonWriter.get(companies).build()));
+      System.out.println(no.geosoft.jpwls.json.JsonWriter.toString(no.geosoft.jpwls.json.JsonWriter.get(companies).build()));
       stream.close();
 
       System.out.println("===TOOLS===============");
       stream = new java.net.URL(pwlsUrl).openStream();
       Tools tools = ExcelReader.readTools(stream);
-      System.out.println(no.geosoft.pwls.json.JsonWriter.toString(no.geosoft.pwls.json.JsonWriter.get(tools).build()));
+      System.out.println(no.geosoft.jpwls.json.JsonWriter.toString(no.geosoft.jpwls.json.JsonWriter.get(tools).build()));
       stream.close();
 
       System.out.println("===CURVES==============");
       stream = new java.net.URL(pwlsUrl).openStream();
       Curves curves = ExcelReader.readCurves(stream);
-      System.out.println(no.geosoft.pwls.json.JsonWriter.toString(no.geosoft.pwls.json.JsonWriter.get(curves).build()));
+      System.out.println(no.geosoft.jpwls.json.JsonWriter.toString(no.geosoft.jpwls.json.JsonWriter.get(curves).build()));
       stream.close();
 
       System.out.println("===CURVES/TOOLS========");
       stream = new java.net.URL(pwlsUrl).openStream();
       ExcelReader.readCurvesWithinTools(stream, tools, curves);
-      System.out.println(no.geosoft.pwls.json.JsonWriter.toString(no.geosoft.pwls.json.JsonWriter.get(tools).build()));
+      System.out.println(no.geosoft.jpwls.json.JsonWriter.toString(no.geosoft.jpwls.json.JsonWriter.get(tools).build()));
       stream.close();
       */
 
@@ -768,7 +767,7 @@ public final class ExcelReader
       System.out.println("===PROPERTIES==========");
       stream = new java.net.URL(propertiesUrl).openStream();
       Properties properties = ExcelReader.readProperties(stream);
-      System.out.println(no.geosoft.pwls.json.JsonWriter.toString(no.geosoft.pwls.json.JsonWriter.get(properties).build()));
+      System.out.println(no.geosoft.jpwls.json.JsonWriter.toString(no.geosoft.jpwls.json.JsonWriter.get(properties).build()));
       stream.close();
       */
     }

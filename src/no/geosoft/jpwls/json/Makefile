@@ -4,4 +4,4 @@ Source = \
 
 Main = JsonWriter
 
-include $(DEV_HOME)/pwls/Makefile
+include $(DEV_HOME)/jpwls/Makefile

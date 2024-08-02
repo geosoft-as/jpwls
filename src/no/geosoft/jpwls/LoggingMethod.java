@@ -1,4 +1,4 @@
-package no.geosoft.pwls;
+package no.geosoft.jpwls;
 
 public final class LoggingMethod
 {

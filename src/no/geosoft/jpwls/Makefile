@@ -6,7 +6,6 @@ Source = \
 	ISO8601DateParser.java \
 	LoggingMethod.java \
 	LoggingMethods.java \
-	MetaData.java \
 	Properties.java \
 	Property.java \
 	Pwls.java \
@@ -18,4 +17,4 @@ Source = \
 
 Main = PwlsWebService
 
-include $(DEV_HOME)/Jpwls/Makefile
+include $(DEV_HOME)/jpwls/Makefile

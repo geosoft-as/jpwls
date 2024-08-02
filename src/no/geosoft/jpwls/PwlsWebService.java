@@ -1,4 +1,4 @@
-package no.geosoft.pwls;
+package no.geosoft.jpwls;
 
 import java.io.IOException;
 import java.io.OutputStream;
@@ -11,7 +11,7 @@ import com.sun.net.httpserver.HttpExchange;
 import com.sun.net.httpserver.HttpHandler;
 import com.sun.net.httpserver.HttpServer;
 
-import no.geosoft.pwls.json.JsonWriter;
+import no.geosoft.jpwls.json.JsonWriter;
 
 /**
  * The PWLS web service.
@@ -21,10 +21,10 @@ import no.geosoft.pwls.json.JsonWriter;
 public final class PwlsWebService
 {
   /** Base URL for PWLS JSON files. */
-  private static final String BASE_URL = "https://raw.githubusercontent.com/rabbagast/pwls/main/standard";
+  private static final String BASE_URL = "https://raw.githubusercontent.com/geosoft-as/pwls/main/json";
 
   /** The logginr instance. */
-  private static final Logger logger_ = Logger.getLogger(Jpwls.class.getName());
+  private static final Logger logger_ = Logger.getLogger(PwlsWebService.class.getName());
 
   /** The HTTP request handler instance. */
   private static final HttpRequestHandler httpRequestHandler_ = new HttpRequestHandler();

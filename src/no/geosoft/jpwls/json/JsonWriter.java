@@ -1,4 +1,4 @@
-package no.geosoft.pwls.json;
+package no.geosoft.jpwls.json;
 
 import java.io.ByteArrayOutputStream;
 import java.io.PrintStream;
@@ -25,19 +25,19 @@ import javax.json.JsonStructure;
 import javax.json.JsonWriterFactory;
 import javax.json.stream.JsonGenerator;
 
-import no.geosoft.pwls.Companies;
-import no.geosoft.pwls.Company;
-import no.geosoft.pwls.Curve;
-import no.geosoft.pwls.Curves;
-import no.geosoft.pwls.ISO8601DateParser;
-import no.geosoft.pwls.LoggingMethod;
-import no.geosoft.pwls.LoggingMethods;
-import no.geosoft.pwls.Properties;
-import no.geosoft.pwls.Property;
-import no.geosoft.pwls.Tool;
-import no.geosoft.pwls.ToolClass;
-import no.geosoft.pwls.ToolClasses;
-import no.geosoft.pwls.Tools;
+import no.geosoft.jpwls.Companies;
+import no.geosoft.jpwls.Company;
+import no.geosoft.jpwls.Curve;
+import no.geosoft.jpwls.Curves;
+import no.geosoft.jpwls.ISO8601DateParser;
+import no.geosoft.jpwls.LoggingMethod;
+import no.geosoft.jpwls.LoggingMethods;
+import no.geosoft.jpwls.Properties;
+import no.geosoft.jpwls.Property;
+import no.geosoft.jpwls.Tool;
+import no.geosoft.jpwls.ToolClass;
+import no.geosoft.jpwls.ToolClasses;
+import no.geosoft.jpwls.Tools;
 
 public final class JsonWriter
 {
@@ -273,14 +273,14 @@ public final class JsonWriter
 
   public static void main(String[] arguments)
   {
-    String BASE_URL = "https://raw.githubusercontent.com/rabbagast/pwls/main";
+    String BASE_URL = "https://raw.githubusercontent.com/geosoft-as/pwls/main";
 
     File logsFile = new File("C:/Users/jacob/dev/Petroware/PWLS/PWLS v3.0 Logs.xlsx");
     File propertiesFile = new File("C:/Users/jacob/dev/Petroware/PWLS/PWLS v3.0 Properties.xlsx");
 
     try {
       // Companies
-      String url = BASE_URL + "/standard/PWLS_v3.0_Logs.xlsx";
+      String url = BASE_URL + "/excel/PWLS_v3.0_Logs.xlsx";
       java.io.InputStream stream = new java.net.URL(url).openStream();
       Companies companies = no.geosoft.jpwls.excel.ExcelReader.readCompanies(stream);
       JsonArrayBuilder arrayBuilder = JsonWriter.getCompanies(companies.getAll());
@@ -309,6 +309,5 @@ public final class JsonWriter
     catch (IOException exception) {
       exception.printStackTrace();
     }
-
   }
 }

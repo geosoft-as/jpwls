@@ -1,4 +1,4 @@
-package no.geosoft.pwls;
+package no.geosoft.jpwls;
 
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -12,7 +12,7 @@ import java.util.HashSet;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-import no.geosoft.pwls.json.JsonReader;
+import no.geosoft.jpwls.json.JsonReader;
 
 /**
  * The PWLS model.
