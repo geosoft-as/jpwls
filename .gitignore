@@ -1,0 +1,39 @@
+#
+# NetBeans setup
+#
+/nbproject/
+
+#
+# IntelliJ
+#
+.idea/
+
+#
+# VS Code
+#
+.vscode/
+
+#
+# VS Code Java extension
+#
+.settings
+
+#
+# Derived content
+#
+jwls*.jar
+obj/
+objtest/
+docs/
+build/
+dist/
+bin/
+.DS_Store
+
+#
+# Temporary files
+#
+*~
+
+# Ignore Gradle project-specific cache directory
+.gradle
