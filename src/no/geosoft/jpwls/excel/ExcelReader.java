@@ -34,7 +34,7 @@ import no.geosoft.jpwls.ToolClasses;
 import no.geosoft.jpwls.Tools;
 
 /**
- * Reader for PWLS Excel definition.
+ * Reader for the PWLS Excel definition.
  *
  * @author <a href="mailto:jacob.dreyer@geosoft.no">Jacob Dreyer</a>
  */
@@ -52,7 +52,7 @@ public final class ExcelReader
   }
 
   /**
-   * Return the <em>value</em> of the specified cell as a string.
+   * Return the <em>value</em> of the specified Excel cell as a string.
    *
    * @param cell  Cell to investigate. Null in case it doesn't contain anything.
    * @return      Cell value as a string. Never null.
@@ -105,12 +105,13 @@ public final class ExcelReader
   }
 
   /**
-   * Read tools/curves mapping from PWLS Excel sheet "Curves Within Tools".
+   * Read tools/curves mapping from the PWLS Excel sheet "Curves Within Tools"
+   * of the specified stream.
    *
-   * @param file    The MS/Excel file to read from. Non-null.
-   * @param tools   The tools instance to modify. Non-null.
+   * @param stream  The MS/Excel stream to read from. Non-null.
+   * @param tools   The tools instance to populate. Non-null.
    * @param curves  The curves instance to pick curves from. Non-null.
-   * @throws IllegalArgumentException  If tools or curves is null.
+   * @throws IllegalArgumentException  If stream, tools or curves is null.
    * @throws IOException  If the read opertaion fails for some reason.
    */
   public static void readCurvesOfTools(InputStream stream, Tools tools, Curves curves)
@@ -168,18 +169,27 @@ public final class ExcelReader
   }
 
   /**
-   * Read tools/curves mapping from PWLS Excel sheet "Curves Within Tools" of the
+   * Read tools/curves mapping from the PWLS Excel sheet "Curves Within Tools" of the
    * specified file.
    *
    * @param file    The MS/Excel file to read from. Non-null.
    * @param tools   The tools instance to modify. Non-null.
    * @param curves  The curves instance to pick curves from. Non-null.
-   * @throws IllegalArgumentException  If tools or curves is null.
+   * @throws IllegalArgumentException  If file, tools or curves is null.
    * @throws IOException  If the read opertaion fails for some reason.
    */
   public static void readCurvesOfTools(File file, Tools tools, Curves curves)
     throws IOException
   {
+    if (file == null)
+      throw new IllegalArgumentException("file cannot be null");
+
+    if (tools == null)
+      throw new IllegalArgumentException("tools cannot be null");
+
+    if (curves == null)
+      throw new IllegalArgumentException("curves cannot be null");
+
     FileInputStream inputStream = null;
     try {
       inputStream = new FileInputStream(file);
@@ -192,11 +202,11 @@ public final class ExcelReader
   }
 
   /**
-   * Read curves from PWLS Excel sheet "Curves".
+   * Read curves from the PWLS Excel sheet "Curves" of the specified stream.
    *
-   * @param file  The MS/Excel file to read from. Non-null.
+   * @param stream  The MS/Excel stream to read from. Non-null.
    * @return  The requested curves. Never null.
-   * @throws  IOException  If the read opertaion fails for some reason.
+   * @throws IOException  If the read opertaion fails for some reason.
    */
   public static Curves readCurves(InputStream stream)
     throws IOException
@@ -271,6 +281,9 @@ public final class ExcelReader
   public static Curves readCurves(File file)
     throws IOException
   {
+    if (file == null)
+      throw new IllegalArgumentException("file cannot be null");
+
     FileInputStream inputStream = null;
     try {
       inputStream = new FileInputStream(file);
@@ -370,6 +383,9 @@ public final class ExcelReader
   public static Tools readTools(File file)
     throws IOException
   {
+    if (file == null)
+      throw new IllegalArgumentException("file cannot be null");
+
     FileInputStream inputStream = null;
     try {
       inputStream = new FileInputStream(file);
@@ -448,9 +464,20 @@ public final class ExcelReader
     return companies;
   }
 
+  /**
+   * Read companies from PWLS Excel sheet "Company Codes" of the specified file.
+   *
+   * @param file  The MS/Excel file to read from. Non-null.
+   * @return  The requested companies. Never null.
+   * @throws IllegalArgumentException  If file is null.
+   * @throws IOException  If the read operation fails for some reason.
+   */
   public static Companies readCompanies(File file)
     throws IOException
   {
+    if (file == null)
+      throw new IllegalArgumentException("file cannot be null");
+
     FileInputStream inputStream = null;
     try {
       inputStream = new FileInputStream(file);
@@ -465,9 +492,10 @@ public final class ExcelReader
   /**
    * Read logging methods from PWLS Excel sheet "Logging Method".
    *
-   * @param file  The MS/Excel file to read from. Non-null.
-   * @return  The requested logging methods. Never null.
-   * @throws  IOException  If the read opertaion fails for some reason.
+   * @param stream  The MS/Excel stream to read from. Non-null.
+   * @return The requested logging methods. Never null.
+   * @throws IllegalArgumentException  If stream is null.
+   * @throws IOException  If the read opertaion fails for some reason.
    */
   public static LoggingMethods readLoggingMethods(InputStream stream)
     throws IOException
@@ -516,9 +544,19 @@ public final class ExcelReader
     return loggingMethods;
   }
 
+  /**
+   * Read logging methods from PWLS Excel sheet "Logging Method".
+   *
+   * @param file  The MS/Excel file to read from. Non-null.
+   * @return  The requested logging methods. Never null.
+   * @throws  IOException  If the read opertaion fails for some reason.
+   */
   public static LoggingMethods readLoggingMethods(File file)
     throws IOException
   {
+    if (file == null)
+      throw new IllegalArgumentException("file cannot be null");
+
     FileInputStream inputStream = null;
     try {
       inputStream = new FileInputStream(file);
@@ -583,9 +621,20 @@ public final class ExcelReader
     return toolClasses;
   }
 
+  /**
+   * Read tool classes from PWLS Excel sheet "Well Log Tool Class" of the specified file.
+   *
+   * @param file  The MS/Excel file to read from. Non-null.
+   * @return  The requested tool classes. Never null.
+   * @throws IllegalArgumentException  If file is null.
+   * @throws IOException  If the read opertaion fails for some reason.
+   */
   public static ToolClasses readToolClasses(File file)
     throws IOException
   {
+    if (file == null)
+      throw new IllegalArgumentException("file cannot be null");
+
     FileInputStream inputStream = null;
     try {
       inputStream = new FileInputStream(file);
@@ -713,66 +762,6 @@ public final class ExcelReader
     finally {
       if (inputStream != null)
         inputStream.close();
-    }
-  }
-
-  /**
-   * Testing this class.
-   *
-   * @param arguments  Application arguments. Not used.
-   */
-  public static void main(String[] arguments)
-  {
-    String BASE_URL = "https://raw.githubusercontent.com/geosoft-as/pwls/main";
-
-    String pwlsUrl = BASE_URL + "/excel/PWLS_v3.0_Logs.xlsx";
-    String propertiesUrl = BASE_URL + "/excel/PWLS_v3.0_Properties.xlsx";
-
-    java.io.InputStream stream;
-
-    try {
-      System.out.println("===TOOL CLASSES========");
-      stream = new java.net.URL(pwlsUrl).openStream();
-      ToolClasses toolClasses = ExcelReader.readToolClasses(stream);
-      System.out.println(no.geosoft.jpwls.json.JsonWriter.toString(no.geosoft.jpwls.json.JsonWriter.getToolClasses(toolClasses.getAll()).build()));
-      stream.close();
-
-      /*
-      System.out.println("===COMPANIES===========");
-      stream = new java.net.URL(pwlsUrl).openStream();
-      Companies companies = ExcelReader.readCompanies(stream);
-      System.out.println(no.geosoft.jpwls.json.JsonWriter.toString(no.geosoft.jpwls.json.JsonWriter.get(companies).build()));
-      stream.close();
-
-      System.out.println("===TOOLS===============");
-      stream = new java.net.URL(pwlsUrl).openStream();
-      Tools tools = ExcelReader.readTools(stream);
-      System.out.println(no.geosoft.jpwls.json.JsonWriter.toString(no.geosoft.jpwls.json.JsonWriter.get(tools).build()));
-      stream.close();
-
-      System.out.println("===CURVES==============");
-      stream = new java.net.URL(pwlsUrl).openStream();
-      Curves curves = ExcelReader.readCurves(stream);
-      System.out.println(no.geosoft.jpwls.json.JsonWriter.toString(no.geosoft.jpwls.json.JsonWriter.get(curves).build()));
-      stream.close();
-
-      System.out.println("===CURVES/TOOLS========");
-      stream = new java.net.URL(pwlsUrl).openStream();
-      ExcelReader.readCurvesWithinTools(stream, tools, curves);
-      System.out.println(no.geosoft.jpwls.json.JsonWriter.toString(no.geosoft.jpwls.json.JsonWriter.get(tools).build()));
-      stream.close();
-      */
-
-      /*
-      System.out.println("===PROPERTIES==========");
-      stream = new java.net.URL(propertiesUrl).openStream();
-      Properties properties = ExcelReader.readProperties(stream);
-      System.out.println(no.geosoft.jpwls.json.JsonWriter.toString(no.geosoft.jpwls.json.JsonWriter.get(properties).build()));
-      stream.close();
-      */
-    }
-    catch (IOException exception) {
-      exception.printStackTrace();
     }
   }
 }

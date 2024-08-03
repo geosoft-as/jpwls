@@ -149,6 +149,9 @@ public final class Pwls
   /**
    * Initialize the PWLS model from the specified folder, typically
    * the local root folder of the JSON files that makes up the standard.
+   * <p>
+   * Note: This is an alternative constructor suitable for use in
+   * unit testing.
    *
    * @param folder  Folder of JSON files to initialize from. Non-null.
    * @throws IllegalArgumentException  If folder is null.
@@ -250,6 +253,12 @@ public final class Pwls
     }
   }
 
+  /**
+   * Get properties of the PWLS model.
+   *
+   * @param name  Name of property to filter on, or null to get all.
+   * @return      Requested properties. Never null.
+   */
   public Set<Property> getProperties(String name)
   {
     Set<Property> properties = new HashSet<>();
@@ -264,6 +273,12 @@ public final class Pwls
     return properties;
   }
 
+  /**
+   * Get companies of the PWLS model.
+   *
+   * @param companyCode  Company code to filter on, or null to get all.
+   * @return             Requested companies. Never null.
+   */
   public Set<Company> getCompanies(Integer companyCode)
   {
     Set<Company> companies = new HashSet<>();
@@ -278,6 +293,12 @@ public final class Pwls
     return companies;
   }
 
+  /**
+   * Get logging methods of the PWLS model.
+   *
+   * @param name  Name of logging method to filetr on, or null to get all.
+   * @return      Requested logging methods. Never null.
+   */
   public Set<LoggingMethod> getLoggingMethods(String name)
   {
     Set<LoggingMethod> loggingMethods = new HashSet<>();
@@ -292,6 +313,12 @@ public final class Pwls
     return loggingMethods;
   }
 
+  /**
+   * Get tool classes of the PWLS model.
+   *
+   * @param name  Name of tool class to filter on, or null to get all.
+   * @return      Requested tool classes. Never null.
+   */
   public Set<ToolClass> getToolClasses(String name)
   {
     Set<ToolClass> toolClasses = new HashSet<>();
@@ -306,6 +333,16 @@ public final class Pwls
     return toolClasses;
   }
 
+  /**
+   * Get tools of the PWL model.
+   *
+   * @param code           Code of tool to filter on, or null to get all.
+   * @param companyCode    Company code to filter on, or null to get all.
+   * @param group          Group to filter on, or null to get all.
+   * @param genericType    Generic type to filter on, or null to get all.
+   * @param loggingMethod  Logging method to filter on, or null to get all.
+   * @return               Requested tools. Never null.
+   */
   public Set<Tool> getTools(String code, Integer companyCode, String group, String genericType, String loggingMethod)
   {
     Set<Tool> tools = new HashSet<>();
@@ -332,6 +369,13 @@ public final class Pwls
     return tools;
   }
 
+  /**
+   * Get curves of the PWLS model.
+   *
+   * @param mnemonic     Mnemonic to filter on, or null to get all.
+   * @param companyCode  Company code to filter on, or null to get all.
+   * @return             Requested curves. Never null.
+   */
   public Set<Curve> getCurves(String mnemonic, Integer companyCode)
   {
     Set<Curve> curves = new HashSet<>();
@@ -715,10 +759,5 @@ public final class Pwls
     finally {
       stream.close();
     }
-  }
-
-  public static void main(String[] arguments)
-  {
-    Pwls pwls = new Pwls(new File("C:/Users/jacob/dev/pwls/standard"));
   }
 }

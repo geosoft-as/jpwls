@@ -12,6 +12,7 @@ import com.sun.net.httpserver.HttpHandler;
 import com.sun.net.httpserver.HttpServer;
 
 import no.geosoft.jpwls.json.JsonWriter;
+import no.geosoft.jpwls.util.Query;
 
 /**
  * The PWLS web service.
@@ -58,7 +59,7 @@ public final class PwlsWebService
       pwls_ = new Pwls(BASE_URL);
 
       // Use this for populating on local files
-      // pwls_ = new Pwls(new java.io.File("C:/Users/jacob/dev/pwls/standard"));
+      //pwls_ = new Pwls(new java.io.File("C:/Users/jacob/dev/pwls/json"));
 
       logger_.log(Level.INFO, "PWLS is ready.");
     }

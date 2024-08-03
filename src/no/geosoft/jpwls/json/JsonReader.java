@@ -19,7 +19,6 @@ import no.geosoft.jpwls.Companies;
 import no.geosoft.jpwls.Company;
 import no.geosoft.jpwls.Curve;
 import no.geosoft.jpwls.Curves;
-import no.geosoft.jpwls.ISO8601DateParser;
 import no.geosoft.jpwls.LoggingMethod;
 import no.geosoft.jpwls.LoggingMethods;
 import no.geosoft.jpwls.Properties;
@@ -29,56 +28,26 @@ import no.geosoft.jpwls.ToolClass;
 import no.geosoft.jpwls.ToolClasses;
 import no.geosoft.jpwls.Tools;
 
+/**
+ * JSON reader for the PWLS model.
+ *
+ * @author <a href="mailto:jacob.dreyer@geosoft.no">Jacob Dreyer</a>
+ */
 public final class JsonReader
 {
   /** The logger instance. */
   private static final Logger logger_ = Logger.getLogger(JsonReader.class.getName());
 
+  /**
+   * Private constructor to prevent client instantiation.
+   */
   private JsonReader()
   {
     assert false : "This constructor should never be called";
   }
 
-  public static Companies readCompanies(InputStream stream)
-    throws IOException
-  {
-    if (stream == null)
-      throw new IllegalArgumentException("stream cannot be null");
-
-    Companies companies = new Companies();
-
-    javax.json.JsonReader reader = Json.createReader(stream);
-    JsonArray jsonArray = reader.readArray();
-
-    for (int i = 0; i < jsonArray.size(); i++) {
-      JsonObject jsonObject = jsonArray.getJsonObject(i);
-
-      int code = jsonObject.getInt("code");
-      String name = jsonObject.getString("name");
-      Company company = new Company(code, name);
-
-      companies.add(company);
-    }
-
-    return companies;
-  }
-
-  public static Companies readCompanies(File file)
-    throws IOException
-  {
-    FileInputStream inputStream = null;
-    try {
-      inputStream = new FileInputStream(file);
-      return readCompanies(inputStream);
-    }
-    finally {
-      if (inputStream != null)
-        inputStream.close();
-    }
-  }
-
   /**
-   * Read PWLS properties from the specigied JSON stream.
+   * Read PWLS properties from the specified JSON stream.
    *
    * @param stream  JSON stream to read from. Non-null.
    * @return        The properties read. Never null.
@@ -135,13 +104,81 @@ public final class JsonReader
     return properties;
   }
 
+  /**
+   * Read PWLS properties from the specified JSON file.
+   *
+   * @param file JSON file to read from. Non-null.
+   * @return     The properties read. Never null.
+   * @throws IllegalArgumentException  If file is null.
+   * @throws IOException  If the read operation fails for some reason.
+   */
   public static Properties readProperties(File file)
     throws IOException
   {
+    if (file == null)
+      throw new IllegalArgumentException("file cannot be null");
+
     FileInputStream inputStream = null;
     try {
       inputStream = new FileInputStream(file);
       return readProperties(inputStream);
+    }
+    finally {
+      if (inputStream != null)
+        inputStream.close();
+    }
+  }
+
+  /**
+   * Read PWLS companies from the specified JSON stream.
+   *
+   * @param stream  JSON stream to read from. Non-null.
+   * @return        The companies read. Never null.
+   * @throws IllegalArgumentException  If stream is null.
+   * @throws IOException  If the read operation fails for some reason.
+   */
+  public static Companies readCompanies(InputStream stream)
+    throws IOException
+  {
+    if (stream == null)
+      throw new IllegalArgumentException("stream cannot be null");
+
+    Companies companies = new Companies();
+
+    javax.json.JsonReader reader = Json.createReader(stream);
+    JsonArray jsonArray = reader.readArray();
+
+    for (int i = 0; i < jsonArray.size(); i++) {
+      JsonObject jsonObject = jsonArray.getJsonObject(i);
+
+      int code = jsonObject.getInt("code");
+      String name = jsonObject.getString("name");
+      Company company = new Company(code, name);
+
+      companies.add(company);
+    }
+
+    return companies;
+  }
+
+  /**
+   * Read PWLS companies from the specified JSON file.
+   *
+   * @param file  JSON file to read from. Non-null.
+   * @return      The companies read. Never null.
+   * @throws IllegalArgumentException  If file is null.
+   * @throws IOException               If the read operation fails for some reason.
+   */
+  public static Companies readCompanies(File file)
+    throws IOException
+  {
+    if (file == null)
+      throw new IllegalArgumentException("file cannot be null");
+
+    FileInputStream inputStream = null;
+    try {
+      inputStream = new FileInputStream(file);
+      return readCompanies(inputStream);
     }
     finally {
       if (inputStream != null)
@@ -189,9 +226,20 @@ public final class JsonReader
     return curves;
   }
 
+  /**
+   * Read PWLS curves from the specified JSON file.
+   *
+   * @param file  JSON file to read from. Non-null.
+   * @return      The curves read. Never null.
+   * @throws IllegalArgumentException  If file is null.
+   * @throws IOException  If the read operation fails for some reason.
+   */
   public static Curves readCurves(File file)
     throws IOException
   {
+    if (file == null)
+      throw new IllegalArgumentException("file cannot be null");
+
     FileInputStream inputStream = null;
     try {
       inputStream = new FileInputStream(file);
@@ -247,9 +295,20 @@ public final class JsonReader
     return tools;
   }
 
+  /**
+   * Read PWLS tools from the specified JSON file.
+   *
+   * @param file  JSON file to read from. Non-null.
+   * @return      The tools read. Never null.
+   * @throws IllegalArgumentException  If file is null.
+   * @throws IOException  If the read operation fails for some reason.
+   */
   public static Tools readTools(File file)
     throws IOException
   {
+    if (file == null)
+      throw new IllegalArgumentException("file cannot be null");
+
     FileInputStream inputStream = null;
     try {
       inputStream = new FileInputStream(file);
@@ -292,9 +351,20 @@ public final class JsonReader
     return toolClasses;
   }
 
+  /**
+   * Read PWLS tool classes from the specified JSON file.
+   *
+   * @param file  JSON file to read from. Non-null.
+   * @return      The tools read. Never null.
+   * @throws IllegalArgumentException  If file is null.
+   * @throws IOException  If the read operation fails for some reason.
+   */
   public static ToolClasses readToolClasses(File file)
     throws IOException
   {
+    if (file == null)
+      throw new IllegalArgumentException("file cannot be null");
+
     FileInputStream inputStream = null;
     try {
       inputStream = new FileInputStream(file);
@@ -337,9 +407,20 @@ public final class JsonReader
     return loggingMethods;
   }
 
+  /**
+   * Read PWLS logging methods from the specified JSON file.
+   *
+   * @param file  JSON file to read from. Non-null.
+   * @return      The logging methods read. Never null.
+   * @throws IllegalArgumentException  If file is null.
+   * @throws IOException  If the read operation fails for some reason.
+   */
   public static LoggingMethods readLoggingMethods(File file)
     throws IOException
   {
+    if (file == null)
+      throw new IllegalArgumentException("file cannot be null");
+
     FileInputStream inputStream = null;
     try {
       inputStream = new FileInputStream(file);
@@ -351,10 +432,24 @@ public final class JsonReader
     }
   }
 
+  /**
+   * Read PWLS curves by tool from the specified JSON stream.
+   *
+   * @param stream  JSON stream to read from. Non-null.
+   * @param tools   The tools instance to populate. Non-null
+   * @param curves  The curves instance to populate from. Non-null.
+   * @throws IllegalArgumentException  If streamm tools or curves is null.
+   */
   public static void readCurvesByTool(InputStream stream, Tools tools, Curves curves)
   {
     if (stream == null)
       throw new IllegalArgumentException("stream cannot be null");
+
+    if (tools == null)
+      throw new IllegalArgumentException("tools cannot be null");
+
+    if (curves == null)
+      throw new IllegalArgumentException("curves cannot be null");
 
     javax.json.JsonReader reader = Json.createReader(stream);
     JsonArray jsonArray = reader.readArray();
@@ -379,9 +474,27 @@ public final class JsonReader
     }
   }
 
+  /**
+   * Read PWLS curves by tool from the specified JSON file.
+   *
+   * @param file    JSON file to read from. Non-null.
+   * @param tools   The tools instance to populate. Non-null
+   * @param curves  The curves instance to populate from. Non-null.
+   * @throws IllegalArgumentException  If streamm tools or curves is null.
+   * @throws IOException  If the read operation fails for some reason.
+   */
   public static void readCurvesByTool(File file, Tools tools, Curves curves)
     throws IOException
   {
+    if (file == null)
+      throw new IllegalArgumentException("file cannot be null");
+
+    if (tools == null)
+      throw new IllegalArgumentException("tools cannot be null");
+
+    if (curves == null)
+      throw new IllegalArgumentException("curves cannot be null");
+
     FileInputStream inputStream = null;
     try {
       inputStream = new FileInputStream(file);
@@ -390,107 +503,6 @@ public final class JsonReader
     finally {
       if (inputStream != null)
         inputStream.close();
-    }
-  }
-
-
-  public static void main(String[] arguments)
-  {
-    try {
-      String BASE_URL = "https://raw.githubusercontent.com/geosoft-as/pwls/main";
-
-      File logsFile = new File("C:/Users/jacob/dev/Petroware/PWLS/PWLS v3.0 Logs.xlsx");
-      File propertiesFile = new File("C:/Users/jacob/dev/Petroware/PWLS/PWLS v3.0 Properties.xlsx");
-
-      /* TOOLS
-      Tools tools = no.geosoft.jpwls.excel.ExcelReader.readTools(logsFile);
-
-      System.out.println("Complete reading Excel: " + tools.getAll().size());
-
-      javax.json.JsonArrayBuilder toolsBuilder = JsonWriter.get(tools);
-      File file = new File("C:/Users/jacob/dev/Petroware/PWLS/tools.json");
-      java.io.FileOutputStream outputStream = new java.io.FileOutputStream(file);
-      JsonWriter.save(outputStream, toolsBuilder.build());
-      outputStream.close();
-
-      System.out.println("Complete writing JSON: " + file);
-
-      Tools tools2 = JsonReader.readTools(file);
-      System.out.println(tools2);
-      */
-
-      /* TOOL CLASSES
-      ToolClasses toolClasses = no.geosoft.jpwls.excel.ExcelReader.readToolClasses(logsFile);
-
-      System.out.println("Complete reading Excel: " + toolClasses.getAll().size());
-
-      javax.json.JsonArrayBuilder toolClassesBuilder = JsonWriter.get(toolClasses);
-      File file = new File("C:/Users/jacob/dev/Petroware/PWLS/toolClasses.json");
-      java.io.FileOutputStream outputStream = new java.io.FileOutputStream(file);
-      JsonWriter.save(outputStream, toolClassesBuilder.build());
-      outputStream.close();
-
-      System.out.println("Complete writing JSON: " + file);
-
-      ToolClasses toolClasses2 = JsonReader.readToolClasses(file);
-      System.out.println(toolClasses2);
-      */
-
-      /* LOGGING METHODS
-      LoggingMethods loggingMethods = no.geosoft.jpwls.excel.ExcelReader.readLoggingMethods(logsFile);
-
-      System.out.println("Complete reading Excel: " + loggingMethods.getAll().size());
-
-      javax.json.JsonArrayBuilder loggingMethodsBuilder = JsonWriter.get(loggingMethods);
-      File file = new File("C:/Users/jacob/dev/Petroware/PWLS/loggingMethods.json");
-      java.io.FileOutputStream outputStream = new java.io.FileOutputStream(file);
-      JsonWriter.save(outputStream, loggingMethodsBuilder.build());
-      outputStream.close();
-
-      System.out.println("Complete writing JSON: " + file);
-
-      LoggingMethods loggingMethods2 = JsonReader.readLoggingMethods(file);
-      System.out.println(loggingMethods2);
-      */
-
-      /* CURVES BY TOOL
-      System.out.println("READ TOOLS from EXCEL");
-      Tools tools = no.geosoft.jpwls.excel.ExcelReader.readTools(logsFile);
-
-      System.out.println("READ CURVES from EXCEL");
-      Curves curves = no.geosoft.jpwls.excel.ExcelReader.readCurves(logsFile);
-
-      System.out.println("READ CURVES WITHIN TOOLS from EXCEL");
-      no.geosoft.jpwls.excel.ExcelReader.readCurvesByTool(logsFile, tools, curves);
-
-      System.out.println("WRITE curvesByTool.json");
-      javax.json.JsonArrayBuilder curvesByToolBuilder = JsonWriter.getCurves(tools);
-      File file = new File("C:/Users/jacob/dev/Petroware/PWLS/curvesByTool.json");
-      java.io.FileOutputStream outputStream = new java.io.FileOutputStream(file);
-      JsonWriter.save(outputStream, curvesByToolBuilder.build());
-      outputStream.close();
-
-      System.out.println("READ TOOLS from JSON");
-      File toolsFile = new File("C:/Users/jacob/dev/Petroware/PWLS/tools.json");
-      Tools tools2 = JsonReader.readTools(toolsFile);
-
-      System.out.println("READ CURVES from JSON");
-      File curvesFile = new File("C:/Users/jacob/dev/Petroware/PWLS/curves.json");
-      Curves curves2 = JsonReader.readCurves(curvesFile);
-
-      System.out.println("READ CUVRES BY TOOLS from JSON");
-      JsonReader.readCurvesByTool(file, tools2, curves2);
-
-      System.out.println(tools2);
-      */
-
-      String url = BASE_URL + "/standard/companies.json";
-      InputStream stream = new java.net.URL(url).openStream();
-      Companies companies = JsonReader.readCompanies(stream);
-      System.out.println(companies);
-    }
-    catch (Exception exception) {
-      exception.printStackTrace();
     }
   }
 }

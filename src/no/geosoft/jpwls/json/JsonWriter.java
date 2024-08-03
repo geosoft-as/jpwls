@@ -29,7 +29,6 @@ import no.geosoft.jpwls.Companies;
 import no.geosoft.jpwls.Company;
 import no.geosoft.jpwls.Curve;
 import no.geosoft.jpwls.Curves;
-import no.geosoft.jpwls.ISO8601DateParser;
 import no.geosoft.jpwls.LoggingMethod;
 import no.geosoft.jpwls.LoggingMethods;
 import no.geosoft.jpwls.Properties;
@@ -39,16 +38,67 @@ import no.geosoft.jpwls.ToolClass;
 import no.geosoft.jpwls.ToolClasses;
 import no.geosoft.jpwls.Tools;
 
+/**
+ * Class for writing PWLS instances as JSON.
+ *
+ * @author <a href="mailto:jacob.dreyer@geosoft.no">Jacob Dreyer</a>
+ */
 public final class JsonWriter
 {
+  /**
+   * Private constructor to prevent client instantiation.
+   */
   private JsonWriter()
   {
     assert false : "This constructor should never be called";
   }
 
+  /**
+   * Save the specified JSON structure to the given stream.
+   *
+   * @param stream  Stream to save to. Non-null.
+   * @param json  JSON structure to save. Non-null.
+   * @throws IllegalargumentException  If stream of json is null.
+   * @throws IOException  If the save operation fails for some reason.
+   */
+  public static void save(OutputStream stream, JsonStructure json)
+    throws IOException
+  {
+    if (stream == null)
+      throw new IllegalArgumentException("stream cannot be null");
+
+    if (json == null)
+      throw new IllegalArgumentException("json cannot be null");
+
+    Map<String, Object> config = new HashMap<>();
+    config.put(JsonGenerator.PRETTY_PRINTING, true);
+
+    Writer writer = new OutputStreamWriter(stream, StandardCharsets.UTF_8);
+
+    JsonWriterFactory jsonWriterFactory = Json.createWriterFactory(config);
+    javax.json.JsonWriter jsonWriter = jsonWriterFactory.createWriter(writer);
+
+    jsonWriter.write(json);
+    jsonWriter.close();
+  }
+
+  /**
+   * Save the specified JSON structure to the given file.
+   *
+   * @param file  File to save to. Non-null.
+   * @param json  JSON structure to save. Non-null.
+   * @throws IllegalargumentException  If file of json is null.
+   * @throws IOException  If the save operation fails for some reason.
+   */
   public static void save(File file, JsonStructure json)
     throws IOException
   {
+    if (file == null)
+      throw new IllegalArgumentException("file cannot be null");
+
+    if (json == null)
+      throw new IllegalArgumentException("json cannot be null");
+
     FileOutputStream fileStream = new FileOutputStream(file);
     try {
       JsonWriter.save(fileStream, json);
@@ -62,24 +112,17 @@ public final class JsonWriter
     }
   }
 
-  public static void save(OutputStream outputStream, JsonStructure json)
-    throws IOException
-  {
-    Map<String, Object> config = new HashMap<>();
-    config.put(JsonGenerator.PRETTY_PRINTING, true);
-
-    Writer writer = new OutputStreamWriter(outputStream, StandardCharsets.UTF_8);
-
-    JsonWriterFactory jsonWriterFactory = Json.createWriterFactory(config);
-    javax.json.JsonWriter jsonWriter = jsonWriterFactory.createWriter(writer);
-
-    jsonWriter.write(json);
-    jsonWriter.close();
-  }
-
-
+  /**
+   * Return the specified JSON structure as a pretty-printed JSON string.
+   *
+   * @param json  JSON structure to consider. Non-null.
+   * @return      The equivalent pretty-printed JSON string. Never null.
+   */
   public static String toString(JsonStructure json)
   {
+    if (json == null)
+      throw new IllegalArgumentException("json cannot be null");
+
     ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream();
     PrintStream printStream = new PrintStream(byteArrayOutputStream);
 
@@ -93,6 +136,13 @@ public final class JsonWriter
     }
   }
 
+  /**
+   * Return the specified PWLS curve as a JSON object builder.
+   *
+   * @param curve  Curve to consider. Non-null.
+   * @return       The equivalent JSON object builder. Never null.
+   * @throws IllegalArgumentException  If curve is null.
+   */
   public static JsonObjectBuilder getCurve(Curve curve)
   {
     if (curve == null)
@@ -108,6 +158,13 @@ public final class JsonWriter
     return objectBuilder;
   }
 
+  /**
+   * Return the specified PWLS curves as a JSON array builder.
+   *
+   * @param curves  Curves to consider. Non-null.
+   * @return        The equivalent JSON array builder. Never null.
+   * @throws IllegalArgumentException  If curves is null.
+   */
   public static JsonArrayBuilder getCurves(Set<Curve> curves)
   {
     if (curves == null)
@@ -120,6 +177,13 @@ public final class JsonWriter
     return arrayBuilder;
   }
 
+  /**
+   * Return the specified PWLS tool as a JSON object builder.
+   *
+   * @param tool  Tool to consider. Non-null.
+   * @return      The equivalent JSON object builder. Never null.
+   * @throws IllegalArgumentException  If tool is null.
+   */
   public static JsonObjectBuilder getTool(Tool tool)
   {
     if (tool == null)
@@ -137,6 +201,13 @@ public final class JsonWriter
     return objectBuilder;
   }
 
+  /**
+   * Return the specified PWLS tools as a JSON array builder.
+   *
+   * @param tools  Tools to consider. Non-null.
+   * @return       The equivalent JSON array builder. Never null.
+   * @throws IllegalArgumentException  If tools is null.
+   */
   public static JsonArrayBuilder getTools(Set<Tool> tools)
   {
     if (tools == null)
@@ -149,6 +220,13 @@ public final class JsonWriter
     return arrayBuilder;
   }
 
+  /**
+   * Return the specified PWLS company as a JSON object builder.
+   *
+   * @param company  Company to consider. Non-null.
+   * @return         The equivalent JSON object builder. Never null.
+   * @throws IllegalArgumentException  If company is null.
+   */
   public static JsonObjectBuilder getCompany(Company company)
   {
     if (company == null)
@@ -160,6 +238,13 @@ public final class JsonWriter
     return objectBuilder;
   }
 
+  /**
+   * Return the specified PWLS companies as a JSON array builder.
+   *
+   * @param companies  Companies to consider. Non-null.
+   * @return           The equivalent JSON array builder. Never null.
+   * @throws IllegalArgumentException  If companies is null.
+   */
   public static JsonArrayBuilder getCompanies(Set<Company> companies)
   {
     if (companies == null)
@@ -172,6 +257,13 @@ public final class JsonWriter
     return arrayBuilder;
   }
 
+  /**
+   * Return the specified PWLS property as a JSON object builder.
+   *
+   * @param property  Property to consider. Non-null.
+   * @return          The equivalent JSON object builder. Never null.
+   * @throws IllegalArgumentException  If property is null.
+   */
   public static JsonObjectBuilder getProperty(Property property)
   {
     if (property == null)
@@ -194,6 +286,13 @@ public final class JsonWriter
     return objectBuilder;
   }
 
+  /**
+   * Return the specified PWLS properties as a JSON array builder.
+   *
+   * @param properties  Properties to consider. Non-null.
+   * @return            The equivalent JSON array builder. Never null.
+   * @throws IllegalArgumentException  If properties is null.
+   */
   public static JsonArrayBuilder getProperties(Set<Property> properties)
   {
     if (properties == null)
@@ -206,6 +305,13 @@ public final class JsonWriter
     return arrayBuilder;
   }
 
+  /**
+   * Return the specified PWLS tool class as a JSON object builder.
+   *
+   * @param toolClass  Tool class to consider. Non-null.
+   * @return           The equivalent JSON object builder. Never null.
+   * @throws IllegalArgumentException  If toolClass is null.
+   */
   public static JsonObjectBuilder getToolClass(ToolClass toolClass)
   {
     if (toolClass == null)
@@ -217,6 +323,13 @@ public final class JsonWriter
     return objectBuilder;
   }
 
+  /**
+   * Return the specified PWLS tool classes as a JSON array builder.
+   *
+   * @param toolClasses  Tool classes to consider. Non-null.
+   * @return             The equivalent JSON array builder. Never null.
+   * @throws IllegalArgumentException  If toolClasses is null.
+   */
   public static JsonArrayBuilder getToolClasses(Set<ToolClass> toolClasses)
   {
     if (toolClasses == null)
@@ -229,6 +342,13 @@ public final class JsonWriter
     return arrayBuilder;
   }
 
+  /**
+   * Return the specified PWLS logging method as a JSON object builder.
+   *
+   * @param loggingMethod  Logging method to consider. Non-null.
+   * @return               The equivalent JSON object builder. Never null.
+   * @throws IllegalArgumentException  If loggingMethod is null.
+   */
   public static JsonObjectBuilder getLoggingMethod(LoggingMethod loggingMethod)
   {
     if (loggingMethod == null)
@@ -240,6 +360,13 @@ public final class JsonWriter
     return objectBuilder;
   }
 
+  /**
+   * Return the specified PWLS logging methods as a JSON array builder.
+   *
+   * @param loggingMethods  Logging methods to consider. Non-null.
+   * @return                The equivalent JSON array builder. Never null.
+   * @throws IllegalArgumentException  If loggingMethods is null.
+   */
   public static JsonArrayBuilder getLoggingMethods(Set<LoggingMethod> loggingMethods)
   {
     if (loggingMethods == null)
@@ -269,45 +396,5 @@ public final class JsonWriter
     }
 
     return arrayBuilder;
-  }
-
-  public static void main(String[] arguments)
-  {
-    String BASE_URL = "https://raw.githubusercontent.com/geosoft-as/pwls/main";
-
-    File logsFile = new File("C:/Users/jacob/dev/Petroware/PWLS/PWLS v3.0 Logs.xlsx");
-    File propertiesFile = new File("C:/Users/jacob/dev/Petroware/PWLS/PWLS v3.0 Properties.xlsx");
-
-    try {
-      // Companies
-      String url = BASE_URL + "/excel/PWLS_v3.0_Logs.xlsx";
-      java.io.InputStream stream = new java.net.URL(url).openStream();
-      Companies companies = no.geosoft.jpwls.excel.ExcelReader.readCompanies(stream);
-      JsonArrayBuilder arrayBuilder = JsonWriter.getCompanies(companies.getAll());
-      System.out.println(JsonWriter.toString(arrayBuilder.build()));
-
-      //ToolClasses toolClasses = no.geosoft.jpwls.excel.ExcelReader.readToolClasses(logsFile);
-      //JsonArrayBuilder arrayBuilder = JsonWriter.get(toolClasses);
-
-      /*
-      Tools tools = no.geosoft.jpwls.excel.ExcelReader.readTools(logsFile);
-      Curves curves = no.geosoft.jpwls.excel.ExcelReader.readCurves(logsFile);
-      no.geosoft.jpwls.excel.ExcelReader.readCurvesWithinTools(logsFile, tools, curves);
-
-      JsonArrayBuilder arrayBuilder = getCurves(tools);
-      System.out.println(JsonWriter.toString(arrayBuilder.build()));
-      */
-
-      /*
-      File file = new File("C:/Users/jacob/companies.json");
-      FileOutputStream fileOutputStream = new FileOutputStream(file);
-      JsonWriter.save(fileOutputStream, arrayBuilder.build());
-      */
-
-      // System.out.println(JsonWriter.toString(arrayBuilder.build()));
-    }
-    catch (IOException exception) {
-      exception.printStackTrace();
-    }
   }
 }

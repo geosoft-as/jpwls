@@ -1,4 +1,4 @@
-package no.geosoft.jpwls;
+package no.geosoft.jpwls.util;
 
 import java.text.ParseException;
 import java.time.Instant;

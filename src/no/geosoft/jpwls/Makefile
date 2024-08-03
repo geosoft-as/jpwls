@@ -3,7 +3,6 @@ Source = \
 	Company.java \
 	Curve.java \
 	Curves.java \
-	ISO8601DateParser.java \
 	LoggingMethod.java \
 	LoggingMethods.java \
 	Properties.java \
