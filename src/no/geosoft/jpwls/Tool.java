@@ -4,26 +4,52 @@ import java.util.Collections;
 import java.util.HashSet;
 import java.util.Set;
 
+/**
+ * Model a PWLS <em>tool</em>.
+ *
+ * @author <a href="mailto:jacob.dreyer@geosoft.no">Jacob Dreyer</a>
+ */
 public final class Tool
 {
+  /** Company code of this tool. */
   private final Integer companyCode_;
 
+  /** Tool code. */
   private final String code_;
 
+  /** Tool group. */
   private final String group_;
 
+  /** Tool marketing name. */
   private final String marketingName_;
 
+  /** Tool description. */
   private final String description_;
 
+  /** The generic type of this tool. */
   private final String genericType_;
 
+  /** The logging methods of this tool. */
   private final String loggingMethod_;
 
+  /** Description of the type of this tool. */
   private final String typeDescription_;
 
+  /** The curves associated with this tool. */
   private final Set<Curve> curves_ = new HashSet<>();
 
+  /**
+   * Create a new tool.
+   *
+   * @param code             Tool code. Non-null.
+   * @param companyCode      Code of company of tool. Non-null.
+   * @param group            Tool group. Non-null.
+   * @param marketingName    Tool marketing name.
+   * @param description      Tool description.
+   * @param genericType      Generic type of this tool.
+   * @param loggingMethod    Logging method of this tool.
+   * @param typeDescription  Description of the type of this tool.
+   */
   public Tool(String code,
               Integer companyCode,
               String group,

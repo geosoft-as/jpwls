@@ -9,7 +9,7 @@ import java.io.UnsupportedEncodingException;
  * Generic class for handling REST queries, i.e. the query string
  * that follows a url in the form:
  * <pre>
- *   <url>?<key1>=<value1>&<key2>=<value3>&...
+ *   &lt;url&gt;?&lt;key1&gt;=&lt;value1&gt;&amp;&lt;key2&gt;=&lt;value3&gt;amp;...
  * </pre>
  *
  * @author <a href="mailto:jacob.dreyer@geosoft.no">Jacob Dreyer</a>

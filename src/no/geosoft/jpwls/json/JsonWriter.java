@@ -58,7 +58,7 @@ public final class JsonWriter
    *
    * @param stream  Stream to save to. Non-null.
    * @param json  JSON structure to save. Non-null.
-   * @throws IllegalargumentException  If stream of json is null.
+   * @throws IllegalArgumentException  If stream of json is null.
    * @throws IOException  If the save operation fails for some reason.
    */
   public static void save(OutputStream stream, JsonStructure json)
@@ -87,7 +87,7 @@ public final class JsonWriter
    *
    * @param file  File to save to. Non-null.
    * @param json  JSON structure to save. Non-null.
-   * @throws IllegalargumentException  If file of json is null.
+   * @throws IllegalArgumentException  If file of json is null.
    * @throws IOException  If the save operation fails for some reason.
    */
   public static void save(File file, JsonStructure json)

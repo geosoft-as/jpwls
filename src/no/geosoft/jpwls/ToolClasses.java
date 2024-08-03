@@ -4,14 +4,30 @@ import java.util.Collections;
 import java.util.Set;
 import java.util.HashSet;
 
+/**
+ * Model all the tool classes defined by the PWLS standard.
+ *
+ * @author <a href="mailto:jacob.dreyer@geosoft.no">Jacob Dreyer</a>
+ */
 public final class ToolClasses
 {
+  /** All tool classes defined by the PWLS standard. */
   private final Set<ToolClass> toolClasses_ = new HashSet<>();
 
+  /**
+   * Create an empty tool classes instance.
+   */
   public ToolClasses()
   {
+    // Nothing
   }
 
+  /**
+   * Add the specified tool class to this instance.
+   *
+   * @param toolClass  Tool class to add. Non-null.
+   * @throws IllegalArgumentException  If toolClass is null.
+   */
   public void add(ToolClass toolClass)
   {
     if (toolClass == null)
@@ -20,11 +36,23 @@ public final class ToolClasses
     toolClasses_.add(toolClass);
   }
 
+  /**
+   * Return all the tool classes of this instance.
+   *
+   * @return  All the tool classes of this instance. Never null.
+   */
   public Set<ToolClass> getAll()
   {
     return Collections.unmodifiableSet(toolClasses_);
   }
 
+  /**
+   * Return tool class of the specified name.
+   *
+   * @param name  Name of tool class to get. Non-null.
+   * @return      The requested tool class, or null if not found,
+   * @throws IllegalArgumentException  If name is null.
+   */
   public ToolClass get(String name)
   {
     if (name == null)

@@ -1,19 +1,32 @@
 package no.geosoft.jpwls;
 
+/**
+ * Model a PWLS <em>property</em> i.e. <em>what</em> is being measured
+ * by a specific curve.
+ *
+ * @author <a href="mailto:jacob.dreyer@geosoft.no">Jacob Dreyer</a>
+ */
 public final class Property
 {
+  /** Property name. Non-null. */
   private final String name_;
 
+  /** Property description. Non-null. */
   private final String description_;
 
+  /** The quantity of this property. Non-null. */
   private final String quantity_;
 
+  /** Property unique ID. Non-null. */
   private final String guid_;
 
+  /** Property sort order. */
   private final int sortOrder_;
 
+  /** Abstract specifier. */
   private final boolean isAbstract_;
 
+  /** Parent property. */
   private Property parent_;
 
   public Property(String name,
@@ -31,11 +44,21 @@ public final class Property
     isAbstract_ = isAbstract;
   }
 
+  /**
+   * Return name of this property.
+   *
+   * @return  Name of this property. Never null.
+   */
   public String getName()
   {
     return name_;
   }
 
+  /**
+   * Return property description.
+   *
+   * @return  Property description. Never null.
+   */
   public String getDescription()
   {
     return description_;
