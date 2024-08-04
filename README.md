@@ -29,12 +29,12 @@ The jpwls repository contains a Java implementation of this standard.
 ## Using jpwls as a web service
 
 jpwls is a REST API web service that can run locally or in cloud.
-A Proof of Concept cloud implementation is hosted in Amazon Web Services (AWS) @ [127.0.0.1](127.0.0.1).
+A Proof of Concept cloud implementation is hosted in Amazon Web Services (AWS) @ [http://127.0.0.1:8000](http://127.0.0.1:8000).
 Any software can access up-to-date PWLS information by simple REST calls like:
 
-* `https://127.0.0.1/companies` ([Try it!](https://127.0.0.1/companies))
-* `https://127.0.0.1/tools` ([Try it!](https://127.0.0.1/companies))
-* `https://127.0.0.1/tools?company=440` ([Try it!](https://127.0.0.1/companies?company=440))
+* `http://127.0.0.1:8000/companies`          ([Try it!](http://127.0.0.1:8000/companies))
+* `http://127.0.0.1:8000/tools`              ([Try it!](http://127.0.0.1:8000/tools))
+* `http://127.0.0.1:8000/tools?company=440`  ([Try it!](http://127.0.0.1:8000/companies?company=440))
 
 and so on.
 
