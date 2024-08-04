@@ -24,7 +24,6 @@
 jwls*.jar
 obj/
 objtest/
-docs/
 build/
 dist/
 bin/
