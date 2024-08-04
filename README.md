@@ -51,9 +51,11 @@ The `Pwls` class provides the API towards PWLS and it can be used like this:
    ...
 ```
 
+Full Java API documentation is available here.
+
 Note that even if the library is embedded in your application, the information is
 still taken from the dynamic GitHub PWLS source and will always be up to date,
-even (depending on implementation) without restarting your application.
+potentially even without restarting the application.
 
 
 ## Contact
