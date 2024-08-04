@@ -1,6 +1,8 @@
 ## jpwls
 
-jpwls is a Java web service or a Java library that implements the [OSDU](https://osduforum.org/OSDU) PWLS standard.
+jpwls is an implementation of the [OSDU](https://osduforum.org/OSDU) PWLS standard,
+either as a _REST API web service_ or a _Java library_.
+
 
 ## OSDU Practical Well Log Standard (PWLS)
 
