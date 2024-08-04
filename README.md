@@ -1,6 +1,10 @@
+## jpwls
+
+jpwls is a Java web service or a Java library that implements the [OSDU](https://osduforum.org/OSDU) PWLS standard.
+
 ## OSDU Practical Well Log Standard (PWLS)
 
-The [OSDU](https://osduforum.org/OSDU) _Practical Well Log Standard_ (PWLS) provides an industry-agreed list of logging tool
+The OSDU _Practical Well Log Standard_ (PWLS) provides an industry-agreed list of logging tool
 classes and a hierarchy of measurement properties and applies all known log mnemonics to them.
 When this information is implemented in stores or software, it supports queries over large
 populations of log data, making it easier for oil and gas professionals to find and use this
@@ -14,8 +18,8 @@ PWLS exists in the following versions:
 
 These are defined by static MS/Excel spreadsheets.
 A dynamic version of the standard based on the JSON format
-is provided by GeoSoft and is availble here. The jpwls repository contains
-an _implementation_ of this standard.
+is provided by GeoSoft and is availble [here](https://github.com/geosoft-as/pwls).
+The jpwls repository contains an _implementation_ of this standard.
 
 
 ## Using jpwls as a web secrvice
@@ -25,11 +29,9 @@ A Proof of Concept implementation is hosted on AWS.
 Any software can access up-to-date PWLS information using simple
 REST calls like:
 
-`https://127.0.0.1/companies` ([Try it!](https://127.0.0.1/companies))
-
-`https://127.0.0.1/tools` ([Try it!](https://127.0.0.1/companies))
-
-`https://127.0.0.1/tools?company=440` ([Try it!](https://127.0.0.1/companies?company=440))
+* `https://127.0.0.1/companies` ([Try it!](https://127.0.0.1/companies))
+* `https://127.0.0.1/tools` ([Try it!](https://127.0.0.1/companies))
+* `https://127.0.0.1/tools?company=440` ([Try it!](https://127.0.0.1/companies?company=440))
 
 and so on.
 
