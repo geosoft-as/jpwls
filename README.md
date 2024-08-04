@@ -69,7 +69,7 @@ The `Pwls` class provides the API towards PWLS and it can be used like this:
    // etc
 ```
 
-Full Java API documentation is available here.
+Full Java API documentation is available [here](https://htmlpreview.github.io/?https://raw.githubusercontent.com/geosoft-as/jpwls/main/docs/index.html).
 
 Note that even if the library is embedded in an application, the information is
 still taken from the dynamic GitHub PWLS source and will always be up to date,
