@@ -47,23 +47,30 @@ instead of going through JSON streams.
 The `Pwls` class provides the API towards PWLS and it can be used like this:
 
 ```Java
+   :
+   using no.geosoft.jpwls.Pwls;
+   using no.geosoft.jpwls.Company;
+   using no.geosoft.jpwls.Tool;
+   :
+
+
    // Establish link to the PWLS source
    Pwls pwls = new Pwls("https://raw.githubusercontent.com/geosoft-as/pwls/main/json");
 
    // Get all companies defined by the PWLS
-   Set<Companie> companies = pwls.getCompanies();
+   Set<Company> companies = pwls.getCompanies();
 
-   // Get all tools defoned by the PWSL
+   // Get all tools defined by the PWSL
    Set<Tool> tools = pwls.getTools();
 
-   // etc.
+   // etc
 ```
 
 Full Java API documentation is available here.
 
-Note that even if the library is embedded in your application, the information is
+Note that even if the library is embedded in an application, the information is
 still taken from the dynamic GitHub PWLS source and will always be up to date,
-potentially even without restarting the application.
+showing live changes potentially without restarting the application.
 
 
 ## Contact
