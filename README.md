@@ -34,7 +34,7 @@ Any software can access up-to-date PWLS information by simple REST calls like:
 
 * `http://127.0.0.1:8000/companies`          ([Try it!](http://127.0.0.1:8000/companies))
 * `http://127.0.0.1:8000/tools`              ([Try it!](http://127.0.0.1:8000/tools))
-* `http://127.0.0.1:8000/tools?company=440`  ([Try it!](http://127.0.0.1:8000/companies?company=440))
+* `http://127.0.0.1:8000/tools?company=440`  ([Try it!](http://127.0.0.1:8000/companies?code=440))
 
 and so on.
 
