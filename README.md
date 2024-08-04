@@ -25,11 +25,11 @@ A Proof of Concept implementation is hosted on AWS.
 Any software can access up-to-date PWLS information using simple
 REST calls like:
 
-`https://127.0.0.1/companies` ([Try it!](https://127.0.0.1/companies)
+`https://127.0.0.1/companies` ([Try it!](https://127.0.0.1/companies))
 
-`https://127.0.0.1/tools` ([Try it!](https://127.0.0.1/companies)
+`https://127.0.0.1/tools` ([Try it!](https://127.0.0.1/companies))
 
-`https://127.0.0.1/tools?company=440` ([Try it!](https://127.0.0.1/companies?company=440)
+`https://127.0.0.1/tools?company=440` ([Try it!](https://127.0.0.1/companies?company=440))
 
 and so on.
 
@@ -40,15 +40,21 @@ Full REST API documentation is availble here.
 
 If the client software is already using Java, jpwls can be embedded
 directly to provide the PWLS information as Java [POJO](https://en.wikipedia.org/wiki/Plain_old_Java_object)s
-instead of going through the JSON streams.
+instead of going through JSON streams.
 
 The `Pwls` class provides the API towards PWLS and it can be used like this:
 
 ```Java
+   // Establish link to the PWLS source
    Pwls pwls = new Pwls("https://raw.githubusercontent.com/geosoft-as/pwls/main/json");
+
+   // Get all companies defined by the PWLS
    Set<Companie> companies = pwls.getCompanies();
+
+   // Get all tools defoned by the PWSL
    Set<Tool> tools = pwls.getTools();
-   ...
+
+   // etc.
 ```
 
 Full Java API documentation is available here.
