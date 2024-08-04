@@ -19,17 +19,18 @@ PWLS exists in the following versions:
 * [v1.0](https://energistics.org/sites/default/files/2023-03/pwls_10.htm) (February 27, 2001)
 
 These are defined by static MS/Excel spreadsheets.
+
 A dynamic version of the standard based on the JSON format
-is provided by GeoSoft and is availble [here](https://github.com/geosoft-as/pwls).
-The jpwls repository contains an _implementation_ of this standard.
+is provided by GeoSoft and is availble in the [pwls](https://github.com/geosoft-as/pwls) repository.
+
+The jpwls repository contains a Java implementation of this standard.
 
 
-## Using jpwls as a web secrvice
+## Using jpwls as a web service
 
 jpwls is a REST API web service that can run locally or in cloud.
-A Proof of Concept implementation is hosted on AWS.
-Any software can access up-to-date PWLS information using simple
-REST calls like:
+A Proof of Concept cloud implementation is hosted in Amazon Web Services (AWS) @ [127.0.0.1](127.0.0.1).
+Any software can access up-to-date PWLS information by simple REST calls like:
 
 * `https://127.0.0.1/companies` ([Try it!](https://127.0.0.1/companies))
 * `https://127.0.0.1/tools` ([Try it!](https://127.0.0.1/companies))
