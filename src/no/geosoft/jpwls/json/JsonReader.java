@@ -151,9 +151,9 @@ public final class JsonReader
     for (int i = 0; i < jsonArray.size(); i++) {
       JsonObject jsonObject = jsonArray.getJsonObject(i);
 
-      int code = jsonObject.getInt("code");
+      int companyCode = jsonObject.getInt("companyCode");
       String name = jsonObject.getString("name");
-      Company company = new Company(code, name);
+      Company company = new Company(companyCode, name);
 
       companies.add(company);
     }
@@ -271,7 +271,7 @@ public final class JsonReader
     for (int i = 0; i < jsonArray.size(); i++) {
       JsonObject jsonObject = jsonArray.getJsonObject(i);
 
-      String code = jsonObject.getString("code", null);
+      String toolCode = jsonObject.getString("toolCode", null);
       int companyCode = jsonObject.getInt("companyCode", -1);
       String group = jsonObject.getString("group", null);
       String marketingName = jsonObject.getString("marketingName", null);
@@ -280,7 +280,7 @@ public final class JsonReader
       String loggingMethod = jsonObject.getString("loggingMethod", null);
       String typeDescription = jsonObject.getString("typeDescription", null);
 
-      Tool tool = new Tool(code,
+      Tool tool = new Tool(toolCode,
                            companyCode != -1 ? companyCode : null,
                            group,
                            marketingName,

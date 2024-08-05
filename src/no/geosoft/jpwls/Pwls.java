@@ -256,15 +256,19 @@ public final class Pwls
   /**
    * Get properties of the PWLS model.
    *
-   * @param name  Name of property to filter on, or null to get all.
-   * @return      Requested properties. Never null.
+   * @param name      Name of property to filter on, or null to get all.
+   * @param quantity  Quantity to filter on, or null to get all.
+   * @return          Requested properties. Never null.
    */
-  public Set<Property> getProperties(String name)
+  public Set<Property> getProperties(String name, String quantity)
   {
     Set<Property> properties = new HashSet<>();
 
     for (Property property : properties_.getAll()) {
       if (name != null && !property.getName().equals(name))
+        continue;
+
+      if (quantity != null && !property.getQuantity().equals(quantity))
         continue;
 
       properties.add(property);
@@ -284,7 +288,7 @@ public final class Pwls
     Set<Company> companies = new HashSet<>();
 
     for (Company company : companies_.getAll()) {
-      if (companyCode != null && companyCode != company.getCode())
+      if (companyCode != null && companyCode != company.getCompanyCode())
         continue;
 
       companies.add(company);
@@ -336,19 +340,19 @@ public final class Pwls
   /**
    * Get tools of the PWL model.
    *
-   * @param code           Code of tool to filter on, or null to get all.
+   * @param toolCode       Code of tool to filter on, or null to get all.
    * @param companyCode    Company code to filter on, or null to get all.
    * @param group          Group to filter on, or null to get all.
    * @param genericType    Generic type to filter on, or null to get all.
    * @param loggingMethod  Logging method to filter on, or null to get all.
    * @return               Requested tools. Never null.
    */
-  public Set<Tool> getTools(String code, Integer companyCode, String group, String genericType, String loggingMethod)
+  public Set<Tool> getTools(String toolCode, Integer companyCode, String group, String genericType, String loggingMethod)
   {
     Set<Tool> tools = new HashSet<>();
 
     for (Tool tool : tools_.getAll()) {
-      if (code != null && !code.equals(tool.getCode()))
+      if (toolCode != null && !toolCode.equals(tool.getToolCode()))
         continue;
 
       if (companyCode != null && !companyCode.equals(tool.getCompanyCode()))
@@ -374,9 +378,11 @@ public final class Pwls
    *
    * @param mnemonic     Mnemonic to filter on, or null to get all.
    * @param companyCode  Company code to filter on, or null to get all.
+   * @param property     Property to filter on, or null to get all.
+   * @param quantity     Quantity to filter on, or null to get all.
    * @return             Requested curves. Never null.
    */
-  public Set<Curve> getCurves(String mnemonic, Integer companyCode)
+  public Set<Curve> getCurves(String mnemonic, Integer companyCode, String property, String quantity)
   {
     Set<Curve> curves = new HashSet<>();
 
@@ -385,6 +391,12 @@ public final class Pwls
         continue;
 
       if (companyCode != null && !companyCode.equals(curve.getCompanyCode()))
+        continue;
+
+      if (property != null && !property.equals(curve.getProperty()))
+        continue;
+
+      if (quantity != null && !quantity.equals(curve.getQuantity()))
         continue;
 
       curves.add(curve);

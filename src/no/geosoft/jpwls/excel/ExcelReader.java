@@ -55,7 +55,7 @@ public final class ExcelReader
    * Return the <em>value</em> of the specified Excel cell as a string.
    *
    * @param cell  Cell to investigate. Null in case it doesn't contain anything.
-   * @return      Cell value as a string. Never null.
+   * @return      Cell value as a string. Null if cell is null or string is empty.
    */
   private static String getCellValueAsString(XSSFCell cell)
   {
@@ -68,7 +68,9 @@ public final class ExcelReader
     else
       cellValue = cell.toString();
 
-    return cellValue.trim();
+    cellValue = cellValue.trim();
+
+    return !cellValue.isEmpty() ? cellValue : null;
   }
 
   /**
@@ -81,6 +83,8 @@ public final class ExcelReader
   private static Integer getCellValueAsInteger(XSSFCell cell)
   {
     String text = getCellValueAsString(cell);
+    if (text == null)
+      return null;
 
     try {
       double value = Double.parseDouble(text);
@@ -101,7 +105,7 @@ public final class ExcelReader
   private static boolean getCellValueAsBoolean(XSSFCell cell)
   {
     String text = getCellValueAsString(cell).toLowerCase();
-    return text.equals("true");
+    return "true".equals(text);
   }
 
   /**
@@ -112,7 +116,7 @@ public final class ExcelReader
    * @param tools   The tools instance to populate. Non-null.
    * @param curves  The curves instance to pick curves from. Non-null.
    * @throws IllegalArgumentException  If stream, tools or curves is null.
-   * @throws IOException  If the read opertaion fails for some reason.
+   * @throws IOException  If the read operation fails for some reason.
    */
   public static void readCurvesOfTools(InputStream stream, Tools tools, Curves curves)
     throws IOException
@@ -762,6 +766,45 @@ public final class ExcelReader
     finally {
       if (inputStream != null)
         inputStream.close();
+    }
+  }
+
+  public static void main(String[] arguments)
+  {
+    try {
+      File file = new File("C:/Users/jacob/dev/pwls/excel/PWLS_v3.0_Properties.xlsx");
+
+      Properties properties = ExcelReader.readProperties(file);
+      no.geosoft.jpwls.json.JsonWriter.save(new File("C:/Users/jacob/dev/pwls/json/properties.json"),
+                                            no.geosoft.jpwls.json.JsonWriter.getProperties(properties.getAll()).build());
+
+      file = new File("C:/Users/jacob/dev/pwls/excel/PWLS_v3.0_Logs.xlsx");
+
+      LoggingMethods loggingMethods = ExcelReader.readLoggingMethods(file);
+      no.geosoft.jpwls.json.JsonWriter.save(new File("C:/Users/jacob/dev/pwls/json/loggingMethods.json"),
+                                            no.geosoft.jpwls.json.JsonWriter.getLoggingMethods(loggingMethods.getAll()).build());
+
+      ToolClasses toolClasses = ExcelReader.readToolClasses(file);
+      no.geosoft.jpwls.json.JsonWriter.save(new File("C:/Users/jacob/dev/pwls/json/toolClasses.json"),
+                                            no.geosoft.jpwls.json.JsonWriter.getToolClasses(toolClasses.getAll()).build());
+
+      Companies companies = ExcelReader.readCompanies(file);
+      no.geosoft.jpwls.json.JsonWriter.save(new File("C:/Users/jacob/dev/pwls/json/companies.json"),
+                                            no.geosoft.jpwls.json.JsonWriter.getCompanies(companies.getAll()).build());
+
+      Tools tools = ExcelReader.readTools(file);
+      no.geosoft.jpwls.json.JsonWriter.save(new File("C:/Users/jacob/dev/pwls/json/tools.json"),
+                                            no.geosoft.jpwls.json.JsonWriter.getTools(tools.getAll()).build());
+
+      Curves curves = ExcelReader.readCurves(file);
+      no.geosoft.jpwls.json.JsonWriter.save(new File("C:/Users/jacob/dev/pwls/json/curves.json"),
+                                            no.geosoft.jpwls.json.JsonWriter.getCurves(curves.getAll()).build());
+
+      ExcelReader.readCurvesOfTools(file, tools, curves);
+
+    }
+    catch (Exception exception) {
+      exception.printStackTrace();
     }
   }
 }

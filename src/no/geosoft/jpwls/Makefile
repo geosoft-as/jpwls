@@ -13,6 +13,7 @@ Source = \
 	ToolClass.java \
 	ToolClasses.java \
 	Tools.java \
+	pwls.html \
 
 Main = PwlsWebService
 

@@ -46,7 +46,7 @@ public final class Companies
   public Company get(int companyCode)
   {
     for (Company company : companies_) {
-      if (company.getCode() == companyCode)
+      if (company.getCompanyCode() == companyCode)
         return company;
     }
 

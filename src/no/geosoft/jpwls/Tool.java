@@ -11,28 +11,28 @@ import java.util.Set;
  */
 public final class Tool
 {
+  /** Tool code, i.e. name. Non-null. */
+  private final String toolCode_;
+
   /** Company code of this tool. */
-  private final Integer companyCode_;
+  private final int companyCode_;
 
-  /** Tool code. */
-  private final String code_;
-
-  /** Tool group. */
+  /** Tool group. Null if none or N/A. */
   private final String group_;
 
-  /** Tool marketing name. */
+  /** Tool marketing name. Null if none. */
   private final String marketingName_;
 
-  /** Tool description. */
+  /** Tool description. Null if none provided. */
   private final String description_;
 
-  /** The generic type of this tool. */
+  /** The generic type of this tool. Null if N/A. */
   private final String genericType_;
 
-  /** The logging methods of this tool. */
+  /** The logging methods of this tool. Null if N/A. */
   private final String loggingMethod_;
 
-  /** Description of the type of this tool. */
+  /** Description of the type of this tool. Null if N/A. */
   private final String typeDescription_;
 
   /** The curves associated with this tool. */
@@ -41,17 +41,17 @@ public final class Tool
   /**
    * Create a new tool.
    *
-   * @param code             Tool code. Non-null.
-   * @param companyCode      Code of company of tool. Non-null.
-   * @param group            Tool group. Non-null.
-   * @param marketingName    Tool marketing name.
-   * @param description      Tool description.
-   * @param genericType      Generic type of this tool.
-   * @param loggingMethod    Logging method of this tool.
-   * @param typeDescription  Description of the type of this tool.
+   * @param toolCode         Tool code. Non-null.
+   * @param companyCode      Code of company of tool.
+   * @param group            Tool group. Null if none or N/A.
+   * @param marketingName    Tool marketing name. Null if none.
+   * @param description      Tool description. Null if none provided.
+   * @param genericType      Generic type of this tool. Null if N/A.
+   * @param loggingMethod    Logging method of this tool. Null if N/A.
+   * @param typeDescription  Description of the type of this tool. Null if N/A.
    */
-  public Tool(String code,
-              Integer companyCode,
+  public Tool(String toolCode,
+              int companyCode,
               String group,
               String marketingName,
               String description,
@@ -59,7 +59,10 @@ public final class Tool
               String loggingMethod,
               String typeDescription)
   {
-    code_ = code;
+    if (toolCode == null)
+      throw new IllegalArgumentException("toolCode cannot be null");
+
+    toolCode_ = toolCode;
     companyCode_ = companyCode;
     group_ = group;
     marketingName_ = marketingName;
@@ -69,6 +72,12 @@ public final class Tool
     typeDescription_ = typeDescription;
   }
 
+  /**
+   * Associate the specified curve with this tool.
+   *
+   * @param curve  Curve to add. Non-null.
+   * @throws IllegalArgumentException  If curve is null.
+   */
   public void addCurve(Curve curve)
   {
     if (curve == null)
@@ -77,46 +86,91 @@ public final class Tool
     curves_.add(curve);
   }
 
-  public String getCode()
+  /**
+   * Return the tool code of this tool.
+   *
+   * @return  The tool code of this tool. Never null.
+   */
+  public String getToolCode()
   {
-    return code_;
+    return toolCode_;
   }
 
-  public Integer getCompanyCode()
+  /**
+   * Return the company code of the company of this tool.
+   *
+   * @return  The company code of the company of this tool. Never null.
+   */
+  public int getCompanyCode()
   {
     return companyCode_;
   }
 
+  /**
+   * Return the group of this tool.
+   *
+   * @return  The group of this tool. Null if none or N/A.
+   */
   public String getGroup()
   {
-    return code_;
+    return group_;
   }
 
+  /**
+   * Return the marketing name of this tool.
+   *
+   * @return  Marketing name of this tool. Null if none.
+   */
   public String getMarketingName()
   {
     return marketingName_;
   }
 
+  /**
+   * Return the description of this tool.
+   *
+   * @return  Description of this tool. Null if none provided.
+   */
   public String getDescription()
   {
     return description_;
   }
 
+  /**
+   * Return the generic tool type of this tool.
+   *
+   * @return  Generic tool type of this tool. Null if N/A.
+   */
   public String getGenericType()
   {
     return genericType_;
   }
 
+  /**
+   * Return the logging method of this tool.
+   *
+   * @return  Logging method of this tool. Null if N/A.
+   */
   public String getLoggingMethod()
   {
     return loggingMethod_;
   }
 
+  /**
+   * Return the tool type description of this tool.
+   *
+   * @return  Tool type description of this tool. Null if N/A.
+   */
   public String getTypeDescription()
   {
     return typeDescription_;
   }
 
+  /**
+   * Return the curves associated with this tool.
+   *
+   * @return  The curves associated with this tool. Never null.
+   */
   public Set<Curve> getCurves()
   {
     return Collections.unmodifiableSet(curves_);
@@ -127,7 +181,7 @@ public final class Tool
   public String toString()
   {
     StringBuilder s = new StringBuilder();
-    s.append("Code.............: " + code_ + "\n");
+    s.append("Tool code........: " + toolCode_ + "\n");
     s.append("Company code.....: " + companyCode_ + "\n");
     s.append("Group............: " + group_ + "\n");
     s.append("Marketing name...: " + marketingName_ + "\n");

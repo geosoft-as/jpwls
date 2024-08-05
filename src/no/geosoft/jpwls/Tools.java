@@ -25,16 +25,16 @@ public final class Tools
 
     tools_.add(tool);
 
-    String key = tool.getCode() + tool.getCompanyCode();
+    String key = tool.getToolCode() + tool.getCompanyCode();
     toolsByCode_.put(key, tool);
   }
 
-  public Tool get(String code, int companyCode)
+  public Tool get(String toolCode, int companyCode)
   {
-    if (code == null)
-      throw new IllegalArgumentException("code cannot be null");
+    if (toolCode == null)
+      throw new IllegalArgumentException("toolCode cannot be null");
 
-    String key = code + companyCode;
+    String key = toolCode + companyCode;
     return toolsByCode_.get(key);
   }
 

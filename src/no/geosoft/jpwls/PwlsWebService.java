@@ -1,6 +1,7 @@
 package no.geosoft.jpwls;
 
 import java.io.IOException;
+import java.io.InputStream;
 import java.io.OutputStream;
 import java.net.InetSocketAddress;
 import java.util.Set;
@@ -36,6 +37,41 @@ public final class PwlsWebService
   private PwlsWebService()
   {
     assert false : "This constructor should never be called";
+  }
+
+  /**
+   * Return the local file resource as a string.
+   *
+   * @param resource  Resource (i.e. file name) to read. Non-null.
+   * @return          Content of resource as a string. Never null.
+   */
+  private static String getText(String resource)
+  {
+    assert resource != null : "resource cannot be null";
+
+    InputStream stream = PwlsWebService.class.getResourceAsStream(resource);
+
+    StringBuilder s = new StringBuilder();
+    try {
+      int c = stream.read();
+      while (c != -1) {
+        s.append((char) c);
+        c = stream.read();
+      }
+    }
+    catch (IOException exception) {
+        assert false : "Programming error";
+    }
+    finally {
+      try {
+        stream.close();
+      }
+      catch (IOException exception) {
+        assert false : "Programming error";
+      }
+    }
+
+    return s.toString();
   }
 
   /**
@@ -89,7 +125,8 @@ public final class PwlsWebService
       assert query != null : "query cannot be null";
 
       String name = query.getString("name");
-      Set<Property> properties = pwls_.getProperties(name);
+      String quantity = query.getString("quantity");
+      Set<Property> properties = pwls_.getProperties(name, quantity);
       return JsonWriter.toString(JsonWriter.getProperties(properties).build());
     }
 
@@ -117,7 +154,7 @@ public final class PwlsWebService
     {
       assert query != null : "query cannot be null";
 
-      Integer companyCode = query.getInteger("code");
+      Integer companyCode = query.getInteger("companyCode");
       Set<Company> companies = pwls_.getCompanies(companyCode);
       return JsonWriter.toString(JsonWriter.getCompanies(companies).build());
     }
@@ -162,13 +199,13 @@ public final class PwlsWebService
     {
       assert query != null : "query cannot be null";
 
-      String code = query.getString("code");
+      String toolCode = query.getString("toolCode");
       Integer companyCode = query.getInteger("companyCode");
       String group = query.getString("group");
       String genericType = query.getString("genericType");
       String loggingMethod = query.getString("loggingMethod");
 
-      Set<Tool> tools = pwls_.getTools(code, companyCode, group, genericType, loggingMethod);
+      Set<Tool> tools = pwls_.getTools(toolCode, companyCode, group, genericType, loggingMethod);
       return JsonWriter.toString(JsonWriter.getTools(tools).build());
     }
 
@@ -184,8 +221,10 @@ public final class PwlsWebService
 
       String mnemonic = query.getString("mnemonic");
       Integer companyCode = query.getInteger("companyCode");
+      String property = query.getString("property");
+      String quantity = query.getString("quantity");
 
-      Set<Curve> curves = pwls_.getCurves(mnemonic, companyCode);
+      Set<Curve> curves = pwls_.getCurves(mnemonic, companyCode, property, quantity);
       return JsonWriter.toString(JsonWriter.getCurves(curves).build());
     }
 
@@ -203,6 +242,12 @@ public final class PwlsWebService
 
       String response = "{}";
 
+      String contentType = "application/json";
+
+      if (path.equals("/")) {
+        response = getText("pwls.html");
+        contentType = "text/html";
+      }
       if (path.equals("/properties")) {
         response = getProperties(query);
       }
@@ -222,7 +267,7 @@ public final class PwlsWebService
         response = getTools(query);
       }
 
-      httpExchange.getResponseHeaders().set("Content-Type", "application/json");
+      httpExchange.getResponseHeaders().set("Content-Type", contentType);
 
       try {
         httpExchange.sendResponseHeaders(200, response.getBytes().length);
@@ -244,11 +289,12 @@ public final class PwlsWebService
    */
   public static void main(String[] arguments)
   {
-    int serverPort = 8000;
+    int serverPort = 80;
 
     try {
       InetSocketAddress socketAddress = new InetSocketAddress(serverPort);
       HttpServer httpServer = HttpServer.create(socketAddress, 0);
+      httpServer.createContext("/", httpRequestHandler_);
       httpServer.createContext("/properties", httpRequestHandler_);
       httpServer.createContext("/companies", httpRequestHandler_);
       httpServer.createContext("/loggingmethods", httpRequestHandler_);

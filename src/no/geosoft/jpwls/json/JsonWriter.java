@@ -137,6 +137,60 @@ public final class JsonWriter
   }
 
   /**
+   * Add entry of the specified key/value to the given object builder.
+   *
+   * @param objectBuilder  Object builder to add to. Non-null.
+   * @param key            Key of entry to add. Non-null.
+   * @param value          Value of key. May be null, in case "null" is added.
+   */
+  private static void add(JsonObjectBuilder objectBuilder, String key, String value)
+  {
+    assert objectBuilder != null : "objectBuilder cannot be null";
+    assert key != null : "key cannot be null";
+
+    if (value != null)
+      objectBuilder.add(key, value);
+    else
+      objectBuilder.addNull(key);
+  }
+
+  /**
+   * Add entry of the specified key/value to the given object builder.
+   *
+   * @param objectBuilder  Object builder to add to. Non-null.
+   * @param key            Key of entry to add. Non-null.
+   * @param value          Value of key. May be null, in case "null" is added.
+   */
+  private static void add(JsonObjectBuilder objectBuilder, String key, Integer value)
+  {
+    assert objectBuilder != null : "objectBuilder cannot be null";
+    assert key != null : "key cannot be null";
+
+    if (value != null)
+      objectBuilder.add(key, value);
+    else
+      objectBuilder.addNull(key);
+  }
+
+  /**
+   * Add entry of the specified key/value to the given object builder.
+   *
+   * @param objectBuilder  Object builder to add to. Non-null.
+   * @param key            Key of entry to add. Non-null.
+   * @param value          Value of key. May be null, in case "null" is added.
+   */
+  private static void add(JsonObjectBuilder objectBuilder, String key, Boolean value)
+  {
+    assert objectBuilder != null : "objectBuilder cannot be null";
+    assert key != null : "key cannot be null";
+
+    if (value != null)
+      objectBuilder.add(key, value);
+    else
+      objectBuilder.addNull(key);
+  }
+
+  /**
    * Return the specified PWLS curve as a JSON object builder.
    *
    * @param curve  Curve to consider. Non-null.
@@ -149,12 +203,12 @@ public final class JsonWriter
       throw new IllegalArgumentException("curve cannot be null");
 
     JsonObjectBuilder objectBuilder = Json.createObjectBuilder();
-    objectBuilder.add("mnemonic", curve.getMnemonic());
-    objectBuilder.add("shortMnemonic", curve.getLisMnemonic());
-    objectBuilder.add("companyCode", curve.getCompanyCode());
-    objectBuilder.add("property", curve.getProperty());
-    objectBuilder.add("quantity", curve.getQuantity());
-    objectBuilder.add("description", curve.getDescription());
+    add(objectBuilder, "mnemonic", curve.getMnemonic());
+    add(objectBuilder, "shortMnemonic", curve.getLisMnemonic());
+    add(objectBuilder, "companyCode", curve.getCompanyCode());
+    add(objectBuilder, "property", curve.getProperty());
+    add(objectBuilder, "quantity", curve.getQuantity());
+    add(objectBuilder, "description", curve.getDescription());
     return objectBuilder;
   }
 
@@ -190,14 +244,14 @@ public final class JsonWriter
       throw new IllegalArgumentException("tool cannot be null");
 
     JsonObjectBuilder objectBuilder = Json.createObjectBuilder();
-    objectBuilder.add("code", tool.getCode());
-    objectBuilder.add("companyCode", tool.getCompanyCode());
-    objectBuilder.add("group", tool.getGroup());
-    objectBuilder.add("marketingName", tool.getMarketingName());
-    objectBuilder.add("description", tool.getDescription());
-    objectBuilder.add("genericType", tool.getGenericType());
-    objectBuilder.add("loggingMethod", tool.getLoggingMethod());
-    objectBuilder.add("typeDescription", tool.getTypeDescription());
+    add(objectBuilder, "toolCode", tool.getToolCode());
+    add(objectBuilder, "companyCode", tool.getCompanyCode());
+    add(objectBuilder, "group", tool.getGroup());
+    add(objectBuilder, "marketingName", tool.getMarketingName());
+    add(objectBuilder, "description", tool.getDescription());
+    add(objectBuilder, "genericType", tool.getGenericType());
+    add(objectBuilder, "loggingMethod", tool.getLoggingMethod());
+    add(objectBuilder, "typeDescription", tool.getTypeDescription());
     return objectBuilder;
   }
 
@@ -233,8 +287,8 @@ public final class JsonWriter
       throw new IllegalArgumentException("company cannot be null");
 
     JsonObjectBuilder objectBuilder = Json.createObjectBuilder();
-    objectBuilder.add("code", company.getCode());
-    objectBuilder.add("name", company.getName());
+    add(objectBuilder, "companyCode", company.getCompanyCode());
+    add(objectBuilder, "name", company.getName());
     return objectBuilder;
   }
 
@@ -272,16 +326,13 @@ public final class JsonWriter
     String parentName = property.getParent() != null ? property.getParent().getName() : null;
 
     JsonObjectBuilder objectBuilder = Json.createObjectBuilder();
-    objectBuilder.add("name", property.getName());
-    objectBuilder.add("description", property.getDescription());
-    objectBuilder.add("quantity", property.getQuantity());
-    objectBuilder.add("guid", property.getGuid());
-    if (parentName != null)
-      objectBuilder.add("parent", parentName);
-    else
-      objectBuilder.addNull("parent");
-    objectBuilder.add("sortOrder", property.getSortOrder());
-    objectBuilder.add("isAbstract", property.isAbstract());
+    add(objectBuilder, "name", property.getName());
+    add(objectBuilder, "description", property.getDescription());
+    add(objectBuilder, "quantity", property.getQuantity());
+    add(objectBuilder, "guid", property.getGuid());
+    add(objectBuilder, "parent", parentName);
+    add(objectBuilder, "sortOrder", property.getSortOrder());
+    add(objectBuilder, "isAbstract", property.isAbstract());
 
     return objectBuilder;
   }
@@ -318,8 +369,8 @@ public final class JsonWriter
       throw new IllegalArgumentException("toolClass cannot be null");
 
     JsonObjectBuilder objectBuilder = Json.createObjectBuilder();
-    objectBuilder.add("name", toolClass.getName());
-    objectBuilder.add("description", toolClass.getDescription());
+    add(objectBuilder, "name", toolClass.getName());
+    add(objectBuilder, "description", toolClass.getDescription());
     return objectBuilder;
   }
 
@@ -355,8 +406,8 @@ public final class JsonWriter
       throw new IllegalArgumentException("loggingMethod cannot be null");
 
     JsonObjectBuilder objectBuilder = Json.createObjectBuilder();
-    objectBuilder.add("name", loggingMethod.getName());
-    objectBuilder.add("description", loggingMethod.getDescription());
+    add(objectBuilder, "name", loggingMethod.getName());
+    add(objectBuilder, "description", loggingMethod.getDescription());
     return objectBuilder;
   }
 
@@ -375,25 +426,6 @@ public final class JsonWriter
     JsonArrayBuilder arrayBuilder = Json.createArrayBuilder();
     for (LoggingMethod loggingMethod : loggingMethods)
       arrayBuilder.add(getLoggingMethod(loggingMethod));
-
-    return arrayBuilder;
-  }
-
-  public static JsonArrayBuilder getCurves(Tools tools)
-  {
-    if (tools == null)
-      throw new IllegalArgumentException("tools cannot be null");
-
-    JsonArrayBuilder arrayBuilder = Json.createArrayBuilder();
-    for (Tool tool : tools.getAll()) {
-      for (Curve curve : tool.getCurves()) {
-        JsonObjectBuilder objectBuilder = Json.createObjectBuilder();
-        objectBuilder.add("toolCode", tool.getCode());
-        objectBuilder.add("companyCode", tool.getCompanyCode());
-        objectBuilder.add("curveMnemonic", curve.getMnemonic());
-        arrayBuilder.add(objectBuilder);
-      }
-    }
 
     return arrayBuilder;
   }

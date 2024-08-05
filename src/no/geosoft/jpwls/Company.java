@@ -8,7 +8,7 @@ package no.geosoft.jpwls;
 public final class Company
 {
   /** Company code. */
-  private final int code_;
+  private final int companyCode_;
 
   /** Comany name. Non-null. */
   private final String name_;
@@ -16,16 +16,16 @@ public final class Company
   /**
    * Create a new PWLS company.
    *
-   * @param code  Company code.
-   * @param name  Company name. Non-null.
+   * @param companyCode  Company code.
+   * @param name         Company name. Non-null.
    * @throws IllegalArgumentException  If name is null.
    */
-  public Company(int code, String name)
+  public Company(int companyCode, String name)
   {
     if (name == null)
       throw new IllegalArgumentException("name cannot be null");
 
-    code_ = code;
+    companyCode_ = companyCode;
     name_ = name;
   }
 
@@ -34,9 +34,9 @@ public final class Company
    *
    * @return  The company code of this company.
    */
-  public int getCode()
+  public int getCompanyCode()
   {
-    return code_;
+    return companyCode_;
   }
 
   /**
@@ -53,6 +53,6 @@ public final class Company
   @Override
   public String toString()
   {
-    return name_ + " (" + code_ + ")";
+    return name_ + " (" + companyCode_ + ")";
   }
 }
