@@ -1,0 +1,7 @@
+{
+  "name": "jpwls",
+  "version": "1.0.0",
+  "description": "REST API for the OSDU Practical Well Log Standard (PWLS)",
+  "title": "jpwls REST API",
+  "url" : "https://127.0.0.1/pwls"
+}

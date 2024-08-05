@@ -65,6 +65,20 @@ public final class PwlsWebService
     }
 
     /**
+     * @api {get} /properties/ Return all properties
+     * @apiName Properties
+     * @apiGroup Properties
+     * @apiVersion 1.0.0
+     *
+     * @apiBody {String} [name]  Optional name of property to get.
+     *
+     * @apiSuccessExample Example response:
+     *     {
+     *       "firstname": "John",
+     *       "lastname": "Doe"
+     *     }
+     */
+    /**
      * Return properties from the PWLS model based on the specified query.
      *
      * @param query  Query to consider. Non-null.
@@ -79,6 +93,20 @@ public final class PwlsWebService
       return JsonWriter.toString(JsonWriter.getProperties(properties).build());
     }
 
+    /**
+     * @api {get} /companies/ Return companies from the PWLS model.
+     * @apiName Companies
+     * @apiGroup Companies
+     * @apiVersion 1.0.0
+     *
+     * @apiBody {Number} [companyCode]  Optional company code of company to get.
+     *
+     * @apiSuccessExample Example response:
+     *     {
+     *       "firstname": "John",
+     *       "lastname": "Doe"
+     *     }
+     */
     /**
      * Return companies from the PWLS model based on the specified query.
      *
