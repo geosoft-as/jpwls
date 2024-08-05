@@ -305,7 +305,7 @@ public final class PwlsWebService
       httpServer.start();
     }
     catch (IOException exception) {
-      logger_.log(Level.WARNING, "Unable to start PWLS web service");
+      logger_.log(Level.WARNING, "Unable to start PWLS web service", exception);
     }
   }
 }
