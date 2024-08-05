@@ -244,7 +244,7 @@ public final class PwlsWebService
 
       String contentType = "application/json";
 
-      if (path.equals("/")) {
+      if (path.equals("/") || path.equals("")) {
         response = getText("pwls.html");
         contentType = "text/html";
       }
@@ -297,8 +297,8 @@ public final class PwlsWebService
       httpServer.createContext("/", httpRequestHandler_);
       httpServer.createContext("/properties", httpRequestHandler_);
       httpServer.createContext("/companies", httpRequestHandler_);
-      httpServer.createContext("/loggingmethods", httpRequestHandler_);
-      httpServer.createContext("/toolclasses", httpRequestHandler_);
+      httpServer.createContext("/loggingMethods", httpRequestHandler_);
+      httpServer.createContext("/toolClasses", httpRequestHandler_);
       httpServer.createContext("/tools", httpRequestHandler_);
       httpServer.createContext("/curves", httpRequestHandler_);
       httpServer.setExecutor(null);
