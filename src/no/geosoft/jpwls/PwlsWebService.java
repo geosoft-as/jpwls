@@ -254,10 +254,10 @@ public final class PwlsWebService
       if (path.equals("/companies")) {
         response = getCompanies(query);
       }
-      if (path.equals("/loggingmethods")) {
+      if (path.equals("/loggingMethods")) {
         response = getLoggingMethods(query);
       }
-      if (path.equals("/toolclasses")) {
+      if (path.equals("/toolClasses")) {
         response = getToolClasses(query);
       }
       if (path.equals("/curves")) {
