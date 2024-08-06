@@ -152,11 +152,11 @@ public final class ExcelReader
       XSSFCell curveMnemonicCell = row.getCell(2); // C
       String curveMnemonic = getCellValueAsString(curveMnemonicCell);
 
-      Tool tool = tools.get(toolCode, companyCode);
+      Tool tool = tools.find(toolCode, companyCode);
       if (tool == null)
         logger_.log(Level.WARNING, "Unknown tool: " + toolCode + " for company=" + companyCode);
 
-      Curve curve = curves.get(curveMnemonic, companyCode);
+      Curve curve = curves.find(curveMnemonic, companyCode);
       if (curve == null)
         logger_.log(Level.WARNING, "Unknown curve: " + curveMnemonic + " for company=" + companyCode);
 
@@ -437,7 +437,7 @@ public final class ExcelReader
         continue;
       }
 
-      Company existingCompany = companies.get(companyCode);
+      Company existingCompany = companies.find(companyCode);
       if (existingCompany != null) {
         logger_.log(Level.WARNING, "Company already exists for company code=" + companyCode + ": " + existingCompany);
         continue;
@@ -769,6 +769,11 @@ public final class ExcelReader
     }
   }
 
+  /**
+   * Testing this clas.
+   *
+   * @param arguments  Application arguments. Not used.
+   */
   public static void main(String[] arguments)
   {
     try {

@@ -29,6 +29,17 @@ public final class Property
   /** Parent property. */
   private Property parent_;
 
+  /**
+   * Create a new property instance.
+   *
+   * @param name         Property name. Non-null.
+   * @param description  Property description. Non-null.
+   * @param quantity     The quantity of this property. Non-null.
+   * @param guid         Property unique ID. Non-null.
+   * @param sortOrder    Property sort order.
+   * @param isAbstract   Abstract specifier.
+   * @throws IllegalArgumentException  If name, description, quentity or guid is null.
+   */
   public Property(String name,
                   String description,
                   String quantity,
@@ -36,6 +47,18 @@ public final class Property
                   int sortOrder,
                   boolean isAbstract)
   {
+    if (name == null)
+      throw new IllegalArgumentException("name cannot be null");
+
+    if (description == null)
+      throw new IllegalArgumentException("description cannot be null");
+
+    if (quantity == null)
+      throw new IllegalArgumentException("quantity cannot be null");
+
+    if (guid == null)
+      throw new IllegalArgumentException("guid cannot be null");
+
     name_ = name;
     description_ = description;
     quantity_ = quantity;
@@ -64,31 +87,65 @@ public final class Property
     return description_;
   }
 
+  /**
+   * Return quantity of this property.
+   *
+   * @return  Quantity of this property. Never null.
+   */
   public String getQuantity()
   {
     return quantity_;
   }
 
+  /**
+   * Return the unique ID of this property.
+   *
+   * @return  Unique ID of this property. Never null.
+   */
   public String getGuid()
   {
     return guid_;
   }
 
+  /**
+   * Set parent property of this property.
+   *
+   * @param parent  Parent property. Non-null.
+   * @throws IllegalArgumentException  If parent is null.
+   */
   public void setParent(Property parent)
   {
+    if (parent == null)
+      throw new IllegalArgumentException("parent cannot be null");
+
     parent_ = parent;
   }
 
+  /**
+   * Return the parent property of this property.
+   *
+   * @return  Parent property of this property. Null if at root level.
+   */
   public Property getParent()
   {
     return parent_;
   }
 
+  /**
+   * Return sort order of this property.
+   *
+   * @return  Sort order of this property,
+   */
   public int getSortOrder()
   {
     return sortOrder_;
   }
 
+  /**
+   * Return if this property is abstract or not.
+   *
+   * @return  True if this property is abstract, false otherwise.
+   */
   public boolean isAbstract()
   {
     return isAbstract_;

@@ -6,16 +6,33 @@ import java.util.HashSet;
 import java.util.Map;
 import java.util.Set;
 
+/**
+ * Model all the curves defined by the PWLS standard.
+ *
+ * @author <a href="mailto:jacob.dreyer@geosoft.no">Jacob Dreyer</a>
+ */
 public final class Curves
 {
+  /** All curves defined by the PWLS standard. */
   private final Set<Curve> curves_ = new HashSet<>();
 
+  /** Curves by mnemonic/company code. Cached for performance. */
   private final Map<String,Curve> curvesByMnemonic_ = new HashMap<>();
 
+  /**
+   * Create an empty curves instance.
+   */
   public Curves()
   {
+    // Nothing
   }
 
+  /**
+   * Add the specified curve to this instance.
+   *
+   * @param curve  Curve to add. Non-null.
+   * @throws IllegalArgumentException  If curve is null.
+   */
   public void add(Curve curve)
   {
     if (curve == null)
@@ -27,12 +44,25 @@ public final class Curves
     curvesByMnemonic_.put(key, curve);
   }
 
+  /**
+   * Return all the curves of this instance.
+   *
+   * @return  All the curves of this instance. Never null.
+   */
   public Set<Curve> getAll()
   {
     return Collections.unmodifiableSet(curves_);
   }
 
-  public Curve get(String mnemonic, int companyCode)
+  /**
+   * Find the curve of the specified mnemonic/company code.
+   *
+   * @param mnemonic     Mnemonic of curve to find. Non.null.
+   * @param companyCode  Company code of curve to find.
+   * @return             Requested curve, or null if not found.
+   * @throws IllegalArgumentException  If mnemonic is null.
+   */
+  public Curve find(String mnemonic, int companyCode)
   {
     if (mnemonic == null)
       throw new IllegalArgumentException("mnemonic cannot be null");

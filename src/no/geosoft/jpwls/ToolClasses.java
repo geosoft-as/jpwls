@@ -47,13 +47,13 @@ public final class ToolClasses
   }
 
   /**
-   * Return tool class of the specified name.
+   * Find tool class of the specified name.
    *
-   * @param name  Name of tool class to get. Non-null.
+   * @param name  Name of tool class to find. Non-null.
    * @return      The requested tool class, or null if not found,
    * @throws IllegalArgumentException  If name is null.
    */
-  public ToolClass get(String name)
+  public ToolClass find(String name)
   {
     if (name == null)
       throw new IllegalArgumentException("name cannot be null");

@@ -11,7 +11,7 @@ import java.util.Set;
  */
 public final class Tool
 {
-  /** Tool code, i.e. name. Non-null. */
+  /** Tool code, i.e. its name. Non-null. */
   private final String toolCode_;
 
   /** Company code of this tool. */
@@ -39,7 +39,7 @@ public final class Tool
   private final Set<Curve> curves_ = new HashSet<>();
 
   /**
-   * Create a new tool.
+   * Create a new tool instance.
    *
    * @param toolCode         Tool code. Non-null.
    * @param companyCode      Code of company of tool.
@@ -49,6 +49,7 @@ public final class Tool
    * @param genericType      Generic type of this tool. Null if N/A.
    * @param loggingMethod    Logging method of this tool. Null if N/A.
    * @param typeDescription  Description of the type of this tool. Null if N/A.
+   * @throws IllegalArgumentException  If toolCode is null.
    */
   public Tool(String toolCode,
               int companyCode,

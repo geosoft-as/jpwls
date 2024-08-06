@@ -1,8 +1,8 @@
 package no.geosoft.jpwls;
 
 import java.util.Collections;
-import java.util.Set;
 import java.util.HashSet;
+import java.util.Set;
 
 /**
  * Model all the logging methods defined by the PWLS standard.
@@ -37,13 +37,23 @@ public final class LoggingMethods
   }
 
   /**
-   * Return logging method of the specified name.
+   * Return all the logging methods of this instance.
    *
-   * @param name  Name of logging method to get. Non-null.
+   * @return  All the logging methods of this instance. Never null.
+   */
+  public Set<LoggingMethod> getAll()
+  {
+    return Collections.unmodifiableSet(loggingMethods_);
+  }
+
+  /**
+   * Find logging method of the specified name.
+   *
+   * @param name  Name of logging method to find. Non-null.
    * @return      The requested logging method, or null if not found,
    * @throws IllegalArgumentException  If name is null.
    */
-  public LoggingMethod get(String name)
+  public LoggingMethod find(String name)
   {
     if (name == null)
       throw new IllegalArgumentException("name cannot be null");
@@ -54,16 +64,6 @@ public final class LoggingMethods
 
     // Not found
     return null;
-  }
-
-  /**
-   * Return all the logging methods of this instance.
-   *
-   * @return  All the logging methods of this instance. Never null.
-   */
-  public Set<LoggingMethod> getAll()
-  {
-    return Collections.unmodifiableSet(loggingMethods_);
   }
 
   /** {@inheritDoc} */

@@ -36,24 +36,6 @@ public final class Companies
     companies_.add(company);
   }
 
-
-  /**
-   * Return company of the specified company code.
-   *
-   * @param companyCode  Company code of company to get.
-   * @return             The requested company, or null if not found,
-   */
-  public Company get(int companyCode)
-  {
-    for (Company company : companies_) {
-      if (company.getCompanyCode() == companyCode)
-        return company;
-    }
-
-    // Not found
-    return null;
-  }
-
   /**
    * Return all the companies of this instance.
    *
@@ -62,6 +44,23 @@ public final class Companies
   public Set<Company> getAll()
   {
     return Collections.unmodifiableSet(companies_);
+  }
+
+  /**
+   * Find company of the specified company code.
+   *
+   * @param companyCode  Company code of company to get.
+   * @return             The requested company, or null if not found,
+   */
+  public Company find(int companyCode)
+  {
+    for (Company company : companies_) {
+      if (company.getCompanyCode() == companyCode)
+        return company;
+    }
+
+    // Not found
+    return null;
   }
 
   /** {@inheritDoc} */

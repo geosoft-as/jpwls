@@ -17,7 +17,7 @@ import java.io.UnsupportedEncodingException;
 public final class Query
 {
   /** The individual key/value pars of the query. */
-  private Map<String,String> entries_ = new HashMap<>();
+  private final Map<String,String> entries_ = new HashMap<>();
 
   /**
    * Create a REST query instance based on the specified query string.

@@ -461,11 +461,11 @@ public final class JsonReader
       int companyCode = jsonObject.getInt("companyCode", -1);
       String curveMnemonic = jsonObject.getString("curveMnemonic", null);
 
-      Tool tool = tools.get(toolCode, companyCode);
+      Tool tool = tools.find(toolCode, companyCode);
       if (tool == null)
         logger_.log(Level.WARNING, "Unknown tool: " + toolCode + " for company=" + companyCode);
 
-      Curve curve = curves.get(curveMnemonic, companyCode);
+      Curve curve = curves.find(curveMnemonic, companyCode);
       if (curve == null)
         logger_.log(Level.WARNING, "Unknown curve: " + curveMnemonic + " for company=" + companyCode);
 
