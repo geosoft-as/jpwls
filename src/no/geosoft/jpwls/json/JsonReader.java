@@ -92,12 +92,12 @@ public final class JsonReader
     // Resolve parents
     for (Property property : properties.getAll()) {
       String parentName = parents.get(property);
-      Property parentProperty = properties.findByName(parentName);
+      Property parentProperty = parentName != null ? properties.findByName(parentName) : null;
       if (parentProperty == null)
         logger_.log(Level.WARNING, "Missing parent property for " + property.getName());
 
       // Keep parent == null if at root level
-      if (parentProperty != property)
+      if (parentProperty != null && parentProperty != property)
         property.setParent(parentProperty);
     }
 
