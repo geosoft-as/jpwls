@@ -32,9 +32,9 @@ jpwls is a REST API web service that can run locally or in cloud.
 A Proof-of-Concept cloud implementation is hosted in Amazon Web Services (AWS) @ [http://13.60.27.155:8081](http://13.60.27.155:8081).
 Any software can access up-to-date PWLS information by simple REST calls like:
 
-* `http://13.60.27.155:8081/companies`          ([Try it!](http://13.60.27.155:8081/companies))
-* `http://13.60.27.155:8081/tools`              ([Try it!](http://13.60.27.155:8081/tools))
-* `http://13.60.27.155:8081/companies?code=440` ([Try it!](http://13.60.27.155:8081/companies?code=440))
+* `http://13.60.27.155:8081/companies`                 ([Try it!](http://13.60.27.155:8081/companies))
+* `http://13.60.27.155:8081/tools`                     ([Try it!](http://13.60.27.155:8081/tools))
+* `http://13.60.27.155:8081/companies?companyCode=440` ([Try it!](http://13.60.27.155:8081/companies?companyCode=440))
 
 and so on.
 
