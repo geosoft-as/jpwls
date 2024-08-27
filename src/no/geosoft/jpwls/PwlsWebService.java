@@ -272,7 +272,7 @@ public final class PwlsWebService implements HttpHandler
   {
     PwlsWebService pwlsWebService = new PwlsWebService();
 
-    int serverPort = 80;
+    int serverPort = 8081;
 
     try {
       InetSocketAddress socketAddress = new InetSocketAddress(serverPort);
