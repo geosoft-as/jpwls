@@ -8,12 +8,10 @@ Source = \
 	Properties.java \
 	Property.java \
 	Pwls.java \
-	PwlsWebService.java \
 	Tool.java \
 	ToolClass.java \
 	ToolClasses.java \
 	Tools.java \
-	pwls.html \
 
 Main = PwlsWebService
 

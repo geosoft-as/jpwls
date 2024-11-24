@@ -19,6 +19,3 @@ JavaLibraries = \
 JavaMainClass = no.geosoft.jpwls.PwlsWebService
 
 include $(DEV_HOME)/tools/Make/Makefile
-
-
-
